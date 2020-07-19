@@ -1,0 +1,33 @@
+\section{Signature Schemes}
+
+A signature scheme is made of the following polynomial-time algorithms.
+
+\begin{description}
+    \item[$\kgen(\secparam)$:] The randomized key generation algorithm takes the security parameter  and  outputs a secret and a public key $(\sk, \pk)$.
+
+    \item[$\sign(\sk, \msg)$:] The randomized signing algorithm takes as input the secret key $\sk$ and a message $\msg\in\cMSG$, and produces a signature $\signature$.
+
+    \item[$\ver(\pk, \msg,\signature)$:] The deterministic verification algorithm takes as input the public key $\pk$, a message $\msg$, and a signature $\signature$, and it returns a decision bit.
+\end{description}
+
+A signature scheme should satisfy two properties. The first property says that honestly generated signatures always verify correctly. The second property, called unforgeability, says that it should be hard to forge a signature on a fresh message, even after seeing signatures on polynomially many messages.
+
+\begin{definition}[Correctness of signatures] \label{def:Sigcorrectness}
+    A signature scheme $\Pi= (\kgen, \allowbreak \sign, \ver)$ with message space $\cMSG$ is correct if $\forall\secpar\in\NN$, $\forall (\sk, \pk)$ output by $\kgen(\allowbreak\secparam)$, and $\forall \msg \in \cMSG$, the following holds:
+    \[
+        \Prob{\ver(\pk, \msg,\sign(\sk, \msg)) = 1} = 1.
+    \]
+\end{definition}
+
+\begin{definition}[Unforgeability of signatures] \label{def:SigUnforgeability}
+    A signature scheme $\Pi= (\allowbreak\kgen, \allowbreak \sign, \ver)$ is existentially unforgeable under chosen-message attacks (EUF-CMA) if for all PPT adversaries $\adversary$:
+    \[
+        \Prob{\Sigeufgame_{\Pi,\adversary}(\secpar) = 1} \leq \negl,
+    \]
+    where $\Sigeufgame_{\Pi,\adversary}(\secpar)$ is the following experiment:
+    \begin{enumerate}
+        \item $(\sk, \pk) \getsr \kgen(\secparam)$.
+        \item $(\msg, \signature) \getsr \adversary^{\sign(\sk, \cdot)}(\secparam, \pk)$
+        \item If $\msg \not\in \cQuery_{\sign}$, and $\ver(\pk,\msg, \signature) = 1$, output $1$, else output $0$.
+    \end{enumerate}
+\end{definition}
