@@ -1,0 +1,62 @@
+\documentclass[binding=0.6cm,LaM]{sapthesis}
+
+\usepackage{amssymb, amsmath, amsthm, amsfonts}
+\usepackage[
+	operators,
+	sets,
+	adversary,
+	landau,
+	probability,
+	notions,
+	logic,
+	ff,
+	mm,
+	advantage,
+	primitives,
+	events,
+	complexity,
+	asymptotics,
+	keys,
+	lambda]{cryptocode}
+
+\input{macro.tex}
+
+\usepackage{array}
+\usepackage{microtype}
+\usepackage[utf8]{inputenc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{todonotes}
+\hypersetup{pdftitle={Matchmaking Encryption},pdfauthor={Luigi Russo}}
+\title{Matchmaking Encryption}
+\author{Luigi Russo}
+\IDnumber{1699981}
+\course{Engineering in Computer Science}
+\courseorganizer{Facoltà di Ingegneria dell'Informazione, Informatica e Statistica}
+\AcademicYear{2019/2020}
+\copyyear{2020}
+\advisor{Prof. Riccardo Lazzeretti}
+\advisor{Prof. Daniele Venturi}
+\authoremail{russo.1699981@studenti.uniroma1.it}
+
+\begin{document}
+\frontmatter
+\maketitle
+
+\tableofcontents
+\mainmatter
+
+\input{chapters/introduction.tex}
+\input{chapters/preliminaries.tex}
+\input{chapters/me.tex}
+\input{chapters/cca.tex}
+\input{chapters/conclusions.tex}
+
+\backmatter
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\bibname}
+
+\bibliographystyle{unsrt}
+\bibliography{main}
+\end{document}
