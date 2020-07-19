@@ -1,0 +1,47 @@
+\begin{figure}
+    \begin{pchstack}[center]
+        \procedure[codesize = \scriptsize, bodylinesep=-7pt, colsep=-10cm]{\scriptsize$\NISHmatchgamecca{}_{\Pi, \adversary}(\secpar)$}{%
+            (\mpk, \kpol, \msk) \getsr \setup(\secparam) \\[-2pt]
+            (\msg_0, \msg_1, \raccess_0, \raccess_1, \sattr_0, \sattr_1, \aux) \getsr \adversary^{\ora_1, \ora_2, \ora_3, \ora_4}_1(\secparam, \mpk) \\[-2pt]
+            b \getsr \bin \\[-2pt]
+            \ek_{\sattr_b} \getsr \skgen(\msk, \sattr_b) \\[-2pt]
+            \cipher \getsr \enc(\ek_{\sattr_b}, \raccess_b, \msg_b) \\[-2pt]
+            b' \getsr \adversary^{\ora_1, \ora_2, \ora_3, \ora_4}_2(\secparam, \cipher, \aux) \\[-2pt]
+            \text{If } (b' = b) \quad \pcreturn 1 \\[-2pt]
+            \text{Else } \pcreturn 0
+        }
+        \pchspace
+        \procedure[codesize = \scriptsize, bodylinesep=-7pt]{\scriptsize$\NISHeufgamecca{}_{\Pi, \adversary}(\secpar)$}{%
+            (\mpk, \kpol, \msk) \getsr \setup(\secparam) \\[-2pt]
+            (\cipher, \rattr, \saccess) \getsr \adversary^{\ora_1, \ora_2, \ora_3, \ora_5}(\secparam, \mpk) \\[-2pt]
+            \dk_\rattr \getsr \rkgen(\msk, \rattr) \\[-2pt]
+            \dk_{\saccess} \getsr \polgen(\kpol, \saccess) \\[-2pt]
+            \msg = \dec(\dk_\rattr, \dk_{\saccess}, \cipher) \\[-2pt]
+            \text{If } (\cipher \notin \mathcal{O}_{\ora_5}) \land \forall \sattr \in \cQuery_{\ora_1}:(\saccess(\sattr)=0) \land (\msg \neq \bot) \\[-2pt]
+            \quad \pcreturn 1 \\[-2pt]
+            \text{Else } \pcreturn 0
+        }
+    \end{pchstack}
+    \caption{Games defining privacy and authenticity of ME. Oracles $\ora_1$, $\ora_2$, $\ora_3$ are implemented by $\skgen(\msk,\cdot)$, $\rkgen(\msk,\cdot)$, $\polgen(\kpol, \cdot)$; $\ora_4$ takes in input a tuple $(\rattr, \saccess, \cipher)$ and returns $\dec(\dk_\rattr, \dk_{\saccess}, \cipher); \ora_5$ takes in input a tuple $(\sattr, \raccess, \msg)$ and returns $\enc(\ek_\sattr, \raccess, \msg)$.}
+    \label{fig:MIS-MATCH-AUTH-games-ME}
+\end{figure}
+
+\begin{definition}[Privacy of ME]\label{def:DNISHmatchsecurity}
+    We say that an ME $\Pi$ satisfies {\em privacy} if for all valid PPT adversaries $\adversary$:
+    \[
+        \left\lvert \Prob{\NISHmatchgamecca{}_{\Pi, \adversary}(\secpar) = 1} - \frac{1}{2} \right\rvert \leq \negl,
+    \]
+    where game $\NISHmatchgamecca{}_{\Pi, \adversary}(\secpar)$ is depicted in Fig.\ref{fig:MIS-MATCH-AUTH-games-ME}.
+    Adversary $\adversary$ is called valid if $\forall (\rattr_i, \saccess_i, \cipher_i) \in \cQuery_{\ora_4}, \cipher_i \ne \cipher$ and $\forall \rattr \in \cQuery_{\ora_2}, \forall \saccess \in \cQuery_{\ora_3}$ it satisfies the following invariant:
+    \begin{itemize}
+        \item \textbf{(Mismatch condition).} Either
+              \begin{align}
+                   & (\raccess_0(\rattr) = \raccess_1(\rattr)=0) \lor (\saccess(\sattr_0) = \saccess(\sattr_1)=0) \nonumber                         \\
+                   & \qquad \lor (\raccess_0(\rattr) = \saccess(\sattr_1)=0) \lor (\raccess_1(\rattr) = \saccess(\sattr_0)=0); \label{eq:valid_adv}
+              \end{align}
+        \item \textbf{(Match condition).} Or (if $\exists\hat\rattr \in \cQuery_{\ora_2}, \hat\saccess \in \cQuery_{\ora_3}$ s.t.\ Eq.~\eqref{eq:valid_adv} does not hold)
+              \[
+                  (\msg_0 = \msg_1) \land (\raccess_0(\rattr) =\raccess_1(\rattr)) \land (\saccess(\sattr_0) = \saccess(\sattr_1)).
+              \]
+    \end{itemize}
+\end{definition}
