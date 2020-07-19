@@ -1,6 +1,50 @@
 \documentclass[binding=0.6cm,LaM]{sapthesis}
 
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
 \usepackage{amssymb, amsmath, amsthm, amsfonts}
+
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{rotating}
+
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+\usepackage{stmaryrd}
+\usepackage{array}
+\usepackage[algoruled]{algorithm2e}
+\usepackage{graphicx}
+\usepackage{multicol}
+
+\makeatletter
+\renewcommand\paragraph{%
+	\@startsection{paragraph}
+	{4}
+	{\z@}
+	{3.25ex \@plus1ex \@minus.2ex}
+	{-1em}
+	{\normalfont\normalsize\bfseries\maybe@addperiod}%
+}
+\newcommand{\maybe@addperiod}[1]{%
+	#1\@addpunct{.}%
+}
+\makeatother
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing,decorations.footprints,fadings,calc,trees,mindmap,shadows,decorations.text,patterns,positioning,shapes,matrix,fit}
+
+\usepackage{pgfplots}
+
+\usepackage[hyphens]{url}
+\usepackage{varioref}
+\usepackage{enumitem}
+
+\usepackage{framed}
+
 \usepackage[
 	operators,
 	sets,
@@ -19,14 +63,15 @@
 	keys,
 	lambda]{cryptocode}
 
+\usepackage{varioref}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{breaklinks=true}
+\usepackage{todonotes}
 \input{macro.tex}
 
-\usepackage{array}
-\usepackage{microtype}
-\usepackage[utf8]{inputenc}
-\usepackage[hidelinks]{hyperref}
-\usepackage{todonotes}
-\hypersetup{pdftitle={Matchmaking Encryption},pdfauthor={Luigi Russo}}
+\floatstyle{boxed}
+\restylefloat{figure}
+
 \title{Matchmaking Encryption}
 \author{Luigi Russo}
 \IDnumber{1699981}
