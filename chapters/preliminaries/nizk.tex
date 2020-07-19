@@ -1,0 +1,59 @@
+\section{Non-Interactive Zero Knowledge}
+Let $\Rel$ be a relation, corresponding to an NP language $\Lng$.
+A non-interactive zero-knowledge (NIZK) proof system for $\Rel$
+is a tuple of polynomial-time algorithms $\Pi = (\init, \prover, \verifier)$ specified as follows:
+\begin{itemize}
+    \item The randomized algorithm $\init$ takes as input the security parameter and outputs a common reference string $\crs$;
+    \item The randomized algorithm $\prover(\crs,(\stm,\wit))$, given $(\stm,\wit) \in \Rel$ outputs a proof $\pi$;
+    \item The deterministic algorithm $\verifier(\crs,(\stm,\pi))$, given an instance $\stm$ and a proof $\pi$ outputs either 0 (for ``reject'') or 1 (for ``accept'').
+\end{itemize}
+We say that a NIZK for relation $\Rel$ is {\em correct} if $\forall \secpar\in\NN$, every $\crs$ output by $\init(\secparam)$, and any $(\stm,\wit) \in \Rel$, we have that $\verifier(\crs,(\stm, \prover(\crs, (\stm,\wit))))=1$.
+\newline\newline
+We define two properties of a NIZK proof system.
+The first property, called adaptive multi-theorem zero knowledge, says that honest proofs do not reveal anything beyond the fact that $\stm\in\Lng$.
+The second property, called
+knowledge soundness, requires that every adversary creating a valid proof for some statement, must know the corresponding witness.
+
+\begin{definition}[Adaptive multi-theorem zero-knowledge]\label{def:nizk_zk}
+    A NIZK $\Pi$ for a relation $\Rel$ satisfies adaptive multi-theorem zero-knowledge
+    if there exists a PPT simulator $\nizksim := (\nizksim_0,\nizksim_1)$ such that the following holds:
+    \begin{itemize}
+        \item
+              Algorithm $\nizksim_0$ outputs $\crs$ and a simulation trapdoor $\tpsim$.
+        \item
+              For all PPT distinguishers $\ddv$, we have that
+              \begin{align*}
+                   & \Big\lvert
+                  \Prob{\ddv^{\prover(\crs,(\cdot,\cdot))}(\crs)=1:~\crs\getsr\init(\secparam)}                                 \\
+                   & \qquad - \Prob{\ddv^{\advSOracle(\tpsim,(\cdot,\cdot))}(\crs)=1:~(\crs,\tpsim)\getsr\nizksim_0(\secparam)}
+                  \Big\rvert \le \negl,
+              \end{align*}
+              where the oracle $\advSOracle(\tpsim,\cdot,\cdot)$ takes as input a pair $(\stm,\wit)$ and returns $\nizksim_1(\tpsim,\stm)$ if $(\stm,\wit)\in\Rel$ (and otherwise  $\bot$).
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[True-simulation f-extractability]\label{def:nizk_ks}
+    Let f be a fixed efficiently computable function. A NIZK $\Pi$ for a relation $\Rel$ satisfies true-simulation f-extractability (f-tSE) if there exists a PPT extractor $\nizkext = (\nizkext_0,\nizkext_1)$ such that the following holds:
+    \begin{itemize}
+        \item
+              Algorithm $\nizkext_0$ outputs $\crs$, a simulation trapdoor $\tpsim$ and an extraction trapdoor $\tpext$, such that the distribution of $(\crs,\tpsim)$ is computationally indistinguishable to that of $\nizksim_0(\secparam)$.
+        \item For all PPT adversaries $\adv$, we have that
+              \[
+                  \Prob{
+                      \begin{array}{c}
+                          \verifier(\crs,\stm,\pi)=1 \wedge                      \\
+                          (\stm,\pi)\notin\mathcal{O}_{\alg{O}} \wedge           \\
+                          \forall\wit\, s.t.\, f(\wit)=z, (\stm,\wit)\not\in\Rel \\
+                      \end{array}:
+                      \begin{array}{@{}c}
+                          (\crs,\tpsim,\tpext)\getsr\nizkext_0(\secparam)                \\
+                          (\stm,\pi)\getsr\adv^{\advSOracle(\tpsim,(\cdot,\cdot))}(\crs) \\
+                          z\getsr\nizkext_1(\tpext,\stm,\pi)
+                      \end{array}} \le \negl,
+              \]
+    \end{itemize}
+    where the oracle $\advSOracle(\tpsim,\cdot,\cdot)$ takes as input a pair $(\stm,\wit)$ and returns $\nizksim_1(\tpsim,\stm)$ if $(\stm,\wit)\in\Rel$ (and otherwise  $\bot$).
+
+    In the case when f is the identity function, we simply say that $\Pi$ is true-simulation extractable (tSE).
+
+\end{definition}
