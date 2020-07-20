@@ -10,7 +10,7 @@ is a tuple of polynomial-time algorithms $\Pi = (\init, \prover, \verifier)$ spe
 We say that a NIZK for relation $\Rel$ is {\em correct} if $\forall \secpar\in\NN$, every $\crs$ output by $\init(\secparam)$, and any $(\stm,\wit) \in \Rel$, we have that $\verifier(\crs,(\stm, \prover(\crs, (\stm,\wit))))=1$.
 \newline\newline
 We define two properties of a NIZK proof system.
-The first property, called adaptive multi-theorem zero knowledge, says that honest proofs do not reveal anything beyond the fact that $\stm\in\Lng$.
+The first property, called adaptive multi-theorem zero-knowledge, says that honest proofs do not reveal anything beyond the fact that $\stm\in\Lng$.
 The second property, called
 knowledge soundness, requires that every adversary creating a valid proof for some statement, must know the corresponding witness.
 
