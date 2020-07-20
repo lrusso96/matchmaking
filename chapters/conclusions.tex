@@ -1,2 +1,29 @@
 \chapter{Conclusions}
-\todo[inline]{Write conclusions}
+Matchmaking Encryption leaves open several important questions.
+First, it would be interesting to construct ME from simpler assumptions.
+Second, a natural direction is to come up with efficient ME schemes for the identity-based setting without relying on random oracles.
+Further extensions include ME with multiple authorities and mitigating key escrow, as well as blackbox constructions from ABE schemes.
+
+\section{ME from standard assumptions}
+All the proposed constructions for Matchmaking Encryption rely on concrete cryptographic assumptions such as Randomized Functional Encryption, Digital Signatures and Non-Interactive Zero Knowledge proofs.
+It would be interesting to explore which are the minimal assumptions needed in order to instantiate a ME system, similar to what has been done for ABE schemes by Itkis et al. \cite{Itkis} in 2017.
+In particular, the authors of \cite{Itkis} show a construction which only requires a semantically secure public key encryption scheme, at the cost of tolerating collusions of arbitrary but a priori bounded size.
+
+\section{Efficient IB-ME constructions}
+Identity-Based ME is a special case of ME which only considers equality policies: this implies that rather than providing circuits, the two parties directly specify the identity of their ideal partner.
+A natural extension could be defining an IB-ME construction which is fully secure in the standard model, without relying on random oracles\footnote{A random oracle responds to every unique query with a truly random value chosen uniformly from its output domain.}, and also offering several advantages over general ME schemes: namely, computational efficiency and shorter public parameters.
+One of the possible constructions could be based on decisional Bilinear Diffie-Hellman Exponent assumption, which has already been used to construct simple and efficient hierarchical IBE schemes \cite{Gentry}.
+
+\section{Mitigating key escrow}
+In ME, as well as in any ABE system, all users private keys are issued by an unconditionally trusted authority.
+Such an authority owns the master secret key of the system, and can decrypt all ciphertexts encrypted to any user: potentially this is the target for some attacker, which can obtain private keys and redistribute them for malicious use.
+Thus, it has great significance reducing the trust in the authority in a ME system.
+Some techniques to mitigate the key escrow have already been proposed for IBE and ABE schemes \cite{Wang}, so it is conceivable that these methodologies can be adapted to ME.
+
+\paragraph{Registration-Based ME}
+The notion of Registration-Based Encryption (RBE) was introduced in 2018 by Garg et al. \cite{Garg}, with the goal of mitigating the key escrow, by substituting the trusted authority with a weaker entity called key curator who has no knowledge of any secret key: each party can generate its own secret key and publicly register its identity and the corresponding public key to the key curator. Notably, RBE schemes can be constructed from standard assumptions.
+It would be very interesting to construct a Registration-Based ME scheme, since key escrow is the main obstacle which restricts applicability in many scenarios.
+
+\section{Blackbox constructions from ABE}
+Last but not least, it would be significant to propose blackbox constructions from ABE schemes: in particular, analyze how efficiently one can instantiate a Matchmaking Encryption scheme from already existent ABE systems and under which assumptions.
+This would allow to better understand the relationship between ABE and ME.
