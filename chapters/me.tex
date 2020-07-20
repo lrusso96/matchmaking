@@ -2,7 +2,7 @@
 
 \section{The General Setting}
 Formally, an ME is composed of the following polynomial-time algorithms:
-\begin{description}\label{def:dnish}
+\begin{description}\label{syntax:me}
     \item[$\setup(\secparam)$:] Upon input the security parameter $\secparam$ the randomized setup algorithm outputs the master public key $\mpk$, the master policy key $\kpol$, and the master secret key $\msk$.
           We implicitly assume that all other algorithms take $\mpk$ as input.
     \item[$\skgen(\msk, \sattr)$:] The randomized sender-key generator takes as input the master secret key $\msk$, and attributes $\sattr\in\bin^*$. The algorithm outputs a secret encryption key $\ek_{\sattr}$ for attributes $\sattr$.
@@ -15,7 +15,7 @@ Formally, an ME is composed of the following polynomial-time algorithms:
 
 \paragraph*{Correctness.} Correctness intuitively says that decrypting an honestly generated ciphertext which encrypts a message $\msg$ using sender's attributes $\sattr$ and policy $\raccess$ using decryption keys for receiver's attributes $\rattr$ and access policy $\saccess$ should equal $\msg$ if and only if the receiver's attributes $\rattr$ match the policy $\raccess$ specified by the sender, and at the same time the sender's attributes $\sattr$ match the policy $\saccess$ specified by the receiver. On the other hand, in case of mismatch, the decryption algorithm returns $\bot$.
 More formally:
-\begin{definition}[Correctness of ME]\label{def:DNISHcorrectness}
+\begin{definition}[Correctness of ME]\label{def:me_correctness}
     An ME with message space $\cMSG$ is correct if $\forall\secpar\in\NN$, $\forall (\mpk, \kpol, \msk)$ output by $\setup(\secparam)$,
     $\forall \msg \in \cMSG$, $\forall \sattr,\rattr \in \bin^*$,
     $\forall \raccess,\saccess:\bin^*\rightarrow\bin$:
@@ -32,9 +32,9 @@ More formally:
 \section{The Arranged Setting}
 The syntax of an A-ME is similar to that of an ME, except that decryption keys are associated with both attributes and policies. In particular,
 the following efficient algorithms make an A-ME:
-\begin{description}\label{def:snish_syntax}
+\begin{description}\label{syntax:ame}
 
-    \item[$\skgen,\enc$:] Identical to the ones in an ME (cf.\ \S\ref{sec:DNISH}).
+    \item[$\skgen,\enc$:] Identical to the ones in an ME (cf.\ \S\ref{syntax:me}).
 
     \item[$\setup$:] Upon input the security parameter $\secparam$, the randomized setup algorithm outputs the master public key $\mpk$ and the master secret key $\msk$.
 
@@ -46,7 +46,7 @@ the following efficient algorithms make an A-ME:
 
 The definitions below capture the very same correctness requirement of an ME, but translated to the arranged case.
 
-\begin{definition}[Correctness of A-ME]\label{def:SNISHcorrectness}
+\begin{definition}[Correctness of A-ME]\label{def:ame_correctness}
     An A-ME with message space $\cMSG$ is correct if
     $\forall \secpar \in \NN$, $(\mpk,\msk)$ output by $\setup(\secparam)$, $\forall \msg\in \cMSG$, $\forall \sattr,\rattr \in \bin^*$, $\forall \raccess,\saccess:\bin^* \rightarrow \bin$:
     \[
