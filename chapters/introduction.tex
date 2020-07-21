@@ -17,14 +17,14 @@ Ateniese et al. also defined a possible variant of ME, namely Arranged Matchmaki
 
 \section{Thesis contributions}
 \paragraph{CCA security}
-In this document we revamp the notion of ME, by extending the security definitions to the setting of chosen ciphertext attack (CCA).
+In this document, we revamp the notion of ME by extending the security definitions to the setting of chosen-ciphertext attacks (CCA).
 In this context ciphertexts cannot be malleable\footnote{If malleable, given an encryption of a message m, it is possible to generate another ciphertext which decrypts to f(m), for some function f, without necessarily knowing or learning m.} anymore. We define these two new properties:
 \begin{itemize}
-    \item CCA-privacy: the adversary may now additionally have access to a decryption oracle which answers decryption queries. Intuitively it captures the possibility to generate ciphertexts which correctly decrypt to f(m), given an encryption of m, for some function f.
-    \item CCA-authenticity: the attacker is also given access to an encryption oracle
+    \item CCA-privacy: the adversary may now additionally have access to a decryption oracle which answers decryption queries. This captures privacy even in the presence of attackers that can obtain the decryption of possibly mauled ciphertexts.
+    \item CCA-authenticity: the attacker is also given access to an encryption oracle. This captures authenticity in the presence of attackers that try to generate valid ciphertexts by mauling previously obtained ciphertexts.
 \end{itemize}
-This has been done for both ME and A-ME schemes, in order to capture stronger security guarantees w.r.t. the chosen-plaintext attack (CPA) scenario, addressed in the original paper.
-Indeed, CCA-privacy is of seminal importance in many practical situations: e.g. in 1998 Bleichenbacher showed how to crack an SSL session key in less than a day, simply sending several ciphertexts to a decryption device \cite{Bleichenbacher}.
+We studied CCA security both for ME and A-ME, in order to capture stronger security guarantees w.r.t. the chosen-plaintext attack (CPA) scenario, addressed in the original paper.
+Indeed, CCA security is of seminal importance in many practical situations: e.g. in 1998 Bleichenbacher showed how to crack an SSL session key in less than a day, simply sending several ciphertexts to a decryption device \cite{Bleichenbacher}.
 
 \paragraph{Constructions}
 We finally define black-box constructions to transform any CPA-secure ME (resp. A-ME) scheme into a CCA-private ME (resp. A-ME) scheme, by relying on a Non-Interactive Zero-Knowledge (NIZK) argument system and a Signatures scheme.
