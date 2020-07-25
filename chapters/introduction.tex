@@ -1,19 +1,28 @@
 \chapter{Introduction}
-Matchmaking Encryption is a new form of encryption introduced by Ateniese et al. \cite{Ateniese} as a generalization of \todo{missing ABE formal definition.} Attribute-Based Encryption (ABE)  \cite{Sahai} which enables several new applications where involved participants can specify fine-grained access policies to encrypted data, opening up new ways for secret communications. ME can be extremely useful in order to avoid liability or inappropriateness; indeed, some of the killer applications of ME are: social matchmaking, encrypting bids and votes, censorship-resistant communication for marginalized communities in authoritarian countries.
-\newline\newline
+Matchmaking Encryption is a new form of encryption introduced by Ateniese et al. \cite{Ateniese} as a generalization of Attribute-Based Encryption (ABE) \cite{Sahai} which enables several new applications where involved participants can specify fine-grained access policies to encrypted data, opening up new ways for secret communications.
+ME can be extremely useful in order to avoid liability or inappropriateness; indeed, some of the killer applications of ME are:
+\begin{itemize}
+    \item social matchmaking
+    \item encrypting bids and votes
+    \item censorship-resistant communication for marginalized communities in authoritarian countries.
+\end{itemize}
 In particular, in this context we consider two parties: the sender S with attributes $\sigma$ and the receiver R with attributes $\rho$.
-They can both specify policies (i.e. access rights expressed in terms of attributes) the other party must satisfy in order for the message to be revealed. The policies are represented as circuits $\mathbb{C} : \{0, 1\}^* \to \{0, 1\}$, while the attributes are binary strings of arbitrary length.
-For instance, in the social matchmaking setting, S can encrypt a message $m$ containing his personal details and specify a policy $\mathbb{R}$ so that the message can be decrypted only by his ideal partner, i.e. one who matches the policy. On the other end, R will be able to decrypt the message only if S corresponds to his ideal partner: this is again expressed through a policy $\mathbb{S}$. The decryption is successful if $\mathbb{S}(\sigma) = \mathbb{R}(\rho) = 1$, i.e. both the policies are matched.
+They can both specify policies (i.e. access rights expressed in terms of attributes) the other party must satisfy in order for the message to be revealed.
+The policies are represented as circuits $\mathbb{C} : \{0, 1\}^* \to \{0, 1\}$, while the attributes are binary strings of arbitrary length.
+For instance, in the social matchmaking setting, S can encrypt a message $m$ containing his personal details and specify a policy $\mathbb{R}$ so that the message can be decrypted only by his ideal partner, i.e. one who matches the policy.
+On the other end, R will be able to decrypt the message only if S corresponds to his ideal partner: this is again expressed through a policy $\mathbb{S}$. The decryption is successful if $\mathbb{S}(\sigma) = \mathbb{R}(\rho) = 1$, i.e. both the policies are matched.
 
 \paragraph{Security}
 Security is defined via two properties: privacy and authenticity.
-Intuitively, privacy aims at capturing secrecy of the sender’s inputs in presence of malicious receivers: during the decryption nothing is leaked beyond the fact that a match occurred or did not occur; in particular, in case of mismatch, the reason why the match did not occur is not revealed. This is a much stronger guarantee w.r.t the one addressed by dual policy ABE schemes,\footnote{Here the sender encrypts a message by choosing both a policy and a set of attributes; the receiver can decrypt the ciphertext using a decryption key associated to both the receiver’s policy and attributes.} introduced by Attrapadung and Imai \cite{Attrapadung}, which only protects the secrecy of the message.
+Intuitively, privacy aims at capturing secrecy of the sender’s inputs in presence of malicious receivers: during the decryption nothing is leaked beyond the fact that a match occurred or did not occur; in particular, in case of mismatch, the reason why the match did not occur is not revealed.
+This is a much stronger guarantee w.r.t the one addressed by dual policy ABE schemes,\footnote{Here the sender encrypts a message by choosing both a policy and a set of attributes; the receiver can decrypt the ciphertext using a decryption key associated to both the receiver’s policy and attributes.} introduced by Attrapadung and Imai \cite{Attrapadung}, which only protects the secrecy of the message.
 In order to ensure such a guarantee, any ME construction needs to face the technical challenge of simultaneously checking the policies chosen by S and R: this check can be seen as an atomic operation.
 \newline
 Authenticity, on the contrary, captures security against malicious senders: more formally, it demands that the only way to produce a valid ciphertext under attributes $\sigma$ is to obtain an encryption key corresponding to $\sigma$ from the authority, thus guaranteeing that if a ciphertext decrypts correctly, then it has been created by a sender with the proper encryption key.
 
 \paragraph{A-ME}
-Ateniese et al. also defined a possible variant of ME, namely Arranged Matchmaking Encryption (A-ME). A-ME implies CP-ABE and KP-ABE with the very same expressiveness, but makes different use of decryption keys with respect to ME: indeed A-ME keys are associated with both attributes and policies, while ME makes use of two different keys, one for the policy and the other for the attributes.
+Ateniese et al. also defined a possible variant of ME, namely Arranged Matchmaking Encryption (A-ME).
+A-ME implies CP-ABE and KP-ABE with the very same expressiveness, but makes different use of decryption keys with respect to ME: indeed A-ME keys are associated with both attributes and policies, while ME makes use of two different keys, one for the policy and the other for the attributes.
 
 \section{Thesis contributions}
 \paragraph{CCA security}
