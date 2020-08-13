@@ -7,7 +7,7 @@ ME can be extremely useful in order to avoid liability or inappropriateness; ind
     \item encrypting bids and votes
     \item censorship-resistant communication for marginalized communities in authoritarian countries.
 \end{itemize}
-In particular, in this context we consider two parties: the sender S with attributes $\sigma$ and the receiver R with attributes $\rho$.
+In particular, in this context, we consider two parties: the sender S with attributes $\sigma$ and the receiver R with attributes $\rho$.
 They can both specify policies (i.e. access rights expressed in terms of attributes) the other party must satisfy in order for the message to be revealed.
 The policies are represented as circuits $\mathbb{C} : \{0, 1\}^* \to \{0, 1\}$, while the attributes are binary strings of arbitrary length.
 For instance, in the social matchmaking setting, S can encrypt a message $m$ containing his personal details and specify a policy $\mathbb{R}$ so that the message can be decrypted only by his ideal partner, i.e. one who matches the policy.
@@ -21,20 +21,20 @@ An example is given in figure \ref{fig:me_example}.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{images/me.png}
-    \caption{ME example. Alice encrypts a message with her encyrption key $\ek_{Alice}$, provided by the trusted party: she specifies some arbitrary policy $\raccess$. When Bob receives the ciphertext, tries to decrypt it with his decryption key $\dk_{Bob}$ and a key associated with some arbitrary policy $\saccess$.}
+    \caption{ME example. Alice encrypts a message with her encryption key $\ek_{Alice}$, provided by the trusted party: she specifies some arbitrary policy $\raccess$. When Bob receives the ciphertext, tries to decrypt it with his decryption key $\dk_{Bob}$ and a key associated with some arbitrary policy $\saccess$.}
     \label{fig:me_example}
 \end{figure}
 \newline\newline
 Matchmaking Encryption can be thought of as a non-interactive version of Secret Handshakes (see \ref{sec:sh}), introduced in 2003 by Balfanz et al. \cite{Balfanz}.
-Indeed, ME gives privacy guarantees similar to that of SH, but it provides a more efficient way to communicate (being non-interactive) and, at the same time, it is more flexible since a party is not constrained to a group.
+Indeed, Matchmaking Encryption gives privacy guarantees similar to that of SH, but it provides a more efficient way to communicate (being non-interactive) and, at the same time, it is more flexible since a party is not constrained to a group.
 
 \section{Security}
 Security is defined via two properties: privacy and authenticity.
 
 \paragraph{Privacy}
-Intuitively, privacy aims at capturing secrecy of the sender’s inputs in presence of malicious receivers: during the decryption nothing is leaked beyond the fact that a match occurred or did not occur; in particular, in case of mismatch, the reason why the match did not occur is not revealed.
+Intuitively, privacy aims at capturing secrecy of the sender’s inputs in presence of malicious receivers: during the decryption, nothing is leaked beyond the fact that a match occurred or did not occur; in particular, in case of mismatch, the reason why the match did not occur is not revealed.
 This is a much stronger guarantee w.r.t the one addressed by dual policy ABE schemes,\footnote{Here the sender encrypts a message by choosing both a policy and a set of attributes; the receiver can decrypt the ciphertext using a decryption key associated to both the receiver’s policy and attributes.} introduced by Attrapadung and Imai \cite{Attrapadung}, which only protects the secrecy of the message.
-In order to ensure such a guarantee, any ME construction needs to face the technical challenge of simultaneously checking the policies chosen by S and R: this check can be seen as an atomic operation.
+To ensure such a guarantee, any ME construction needs to face the technical challenge of simultaneously checking the policies chosen by S and R: this check can be seen as an atomic operation.
 
 \paragraph{Authenticity}
 Authenticity, on the contrary, captures security against malicious senders: more formally, it demands that the only way to produce a valid ciphertext under attributes $\sigma$ is to obtain an encryption key corresponding to $\sigma$ from the authority, thus guaranteeing that if a ciphertext decrypts correctly, then it has been created by a sender with the proper encryption key.
@@ -54,7 +54,7 @@ We define these two new properties:
     \item CCA-privacy: the adversary may now additionally have access to a decryption oracle that answers decryption queries. This captures privacy even in the presence of attackers that can obtain the decryption of possibly mauled ciphertexts. See \ref{sec:cca-privacy}.
     \item CCA-authenticity: the attacker is also given access to an encryption oracle. This captures authenticity in the presence of attackers that try to generate valid ciphertexts by mauling previously obtained ciphertexts. See \ref{sec:cca-auth}.
 \end{itemize}
-We studied CCA security both for ME and A-ME, in order to capture stronger security guarantees w.r.t. the chosen-plaintext attack (CPA) scenario, addressed in the original paper.
+We studied CCA security both for ME and A-ME, to capture stronger security guarantees w.r.t. the chosen-plaintext attack (CPA) scenario, addressed in the original paper.
 Indeed, CCA security is of seminal importance in many practical situations: e.g. in 1998 Bleichenbacher showed how to crack an SSL session key in less than a day, simply sending several ciphertexts to a decryption device \cite{Bleichenbacher}.
 
 \paragraph{Constructions}
