@@ -9,7 +9,7 @@ A signature scheme is made of the following polynomial-time algorithms.
 
     \item[$\ver(\pk, \msg,\signature)$:] The deterministic verification algorithm takes as input the public key $\pk$, a message $\msg$, and a signature $\signature$, and it returns a decision bit.
 \end{description}
-
+~\newline
 A signature scheme should satisfy two properties. The first property says that honestly generated signatures always verify correctly. The second property, called unforgeability, says that it should be hard to forge a signature on a fresh message, even after seeing signatures on polynomially many messages.
 
 \begin{definition}[Correctness of signatures] \label{def:Sigcorrectness}

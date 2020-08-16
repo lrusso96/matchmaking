@@ -9,22 +9,20 @@ Let $\Pi'$ be an ME scheme which satisfies privacy. If we use a signature scheme
             \ver(\pk, (\sattr, \signature)) = 1
         \end{array} \Biggr\}.
     \]
-
-    \todo{Bind $\ek_\sattr$ with some randomness $r_2$}
-
+    ~\newline
     where $f(\sattr, \signature, \raccess, \msg, r) = (\sattr, \signature, \raccess, \msg)$, so $f$ extracts all the input but the randomness $r$.
-
+    \newline\newline
     We construct the new ME scheme $\Pi$ as follows:
     \begin{description}
-        \item[$\setup(\secparam)$:] on input the security parameter $\secparam$, the algorithm computes $(\msk', \kpol, \mpk') \getsr \setup'(\secparam)$, $(\sk, \pk) \getsr \kgen(\secparam)$ and $\crs \getsr \init(\secparam)$. The algorithm outputs $\msk = (\msk', \kpol, \sk)$ as the master secret key and $\mpk = (\mpk', \pk, \crs)$ as the master public key. All other algorithms are implicitly given $\mpk$ as additional input.
+        \item[$\setup(\secparam)$:] on input the security parameter, gets $(\msk', \kpol, \mpk') \getsr \setup'(\secparam)$, $(\sk, \pk) \getsr \kgen(\secparam)$ and $\crs \getsr \init(\secparam)$. Then outputs $\msk = (\msk', \kpol, \sk)$ as the master secret key and $\mpk = (\mpk', \pk, \crs)$ as the master public key. All other algorithms are implicitly given $\mpk$ as additional input.
         \item[$\skgen(\msk, \sattr)$:] the randomized sender-key generator takes as input the master secret key $\msk = (\msk', \sk)$ and attributes $\sattr \in \bin^*$. The algorithm returns the encryption key $\ek_\sattr = (\ek'_\sattr, \signature)$, where $\ek'_\sattr \getsr \skgen'(\msk', \sattr)$ and $\signature \getsr \sign(\sk, \sattr)$.
         \item[$\rkgen(\msk, \rattr)$:] the randomized receiver-key generator takes as input the master secret key $\msk = (\msk', \sk)$ and attributes $\rattr \in \bin^*$. The algorithm computes the key $\dk_\rattr \getsr \rkgen'(\msk', \rattr)$.
-        \item[$\polgen(\kpol, \saccess)$:] the receiver policy generator takes as input the master policy key $\kpol$ and a policy $\saccess: \bin^* \to \bin$ and simply outputs $\dk_\saccess \getsr \polgen'(\kpol, \saccess)$.
+        \item[$\polgen(\kpol, \saccess)$:] the receiver policy generator takes as input the master policy key $\kpol$ and a policy $\saccess: \bin^* \to \bin$ and outputs $\dk_\saccess \getsr \polgen'(\kpol, \saccess)$.
         \item[$\enc(\ek_\sattr, \raccess, \msg)$:] the randomized encryption algorithm takes as input a secret encryption key $ek_\sattr = (\ek'_\sattr, \signature)$ for attributes $\sattr \in \bin^*$, a policy $\raccess: \bin^* \to \bin$ and a message $\msg \in \bin^*$. The algorithm first encrypts the message by computing $\cipher' \getsr \enc'(\ek'_\sattr, \raccess, \msg)$; then, it returns the ciphertext $\cipher = (\cipher', \pi)$, where $\pi \getsr \prover(\crs, (\sattr, \signature, \raccess, \msg, r),(\mpk', \pk, \cipher))$.
-        \item[$\dec(\dk_\rattr, \dk_\saccess, \cipher)$:] the deterministic decryption algorithm takes as input a secret decryption key $\dk_\rattr = \dk'_\rattr$, a secret decryption key $\dk_\saccess = \dk'_\saccess$ for a circuit $\saccess: \bin^* \to \bin$ and a ciphertext $\cipher = (\cipher', \pi)$. The algorithm first checks whether $\verifier(\crs, (\cipher', \pk, \mpk'), \pi) = 0$. If true, returns $\bot$; else it returns $\dec'(\dk'_\rattr, \dk_\saccess, \cipher')$.
+        \item[$\dec(\dk_\rattr, \dk_\saccess, \cipher)$:] the deterministic decryption algorithm takes as input a secret decryption key $\dk_\rattr = \dk'_\rattr$, a secret decryption key $\dk_\saccess = \dk'_\saccess$ for a circuit $\saccess: \bin^* \to \bin$ and a ciphertext $\cipher = (\cipher', \pi)$. The algorithm first checks whether $\verifier(\crs, (\cipher', \pk, \mpk'), \pi) = 0$: if true, it simply returns $\bot$; otherwise, it returns $\dec'(\dk'_\rattr, \dk_\saccess, \cipher')$.
     \end{description}
 \end{construction}
-
+~\newline
 The correctness of the scheme follows directly by the correctness of the underlying ME scheme.
 
 \begin{theorem}\label{theo:me_nizk}
@@ -44,14 +42,14 @@ The correctness of the scheme follows directly by the correctness of the underly
                 \item ($\ora_1$) on input $\sattr$, $\adversary'$ invokes $\ora_\sign(\sattr)$ to receive a valid signature $\signature$ for $\sattr$. Then it runs $\ek'_\sattr \getsr \skgen'(\msk, \sattr)$ and returns $\ek_\sattr = (\ek_\sattr', \signature)$.
                 \item ($\ora_2$) on input $\rattr$, $\adversary'$ returns $\ek'_\rattr \getsr \rkgen'(\msk, \rattr)$.
                 \item ($\ora_3$) on input $\saccess$, $\adversary'$ returns $\ek'_\saccess \getsr \polgen'(\msk, \saccess)$.
-                \item (encryption - $\ora_5$) on input $(\sattr, \raccess, \msg)$, computes a valid ciphertext $\cipher' \getsr \enc'(\ek'_\sattr, \raccess, \msg)$, for some $\ek'_\sattr \getsr \skgen'(\msk, \sattr)$. Then returns $\cipher = (\cipher', \pi)$, for a simulated proof $\pi = \nizksim_1(\tpsim, \cipher')$.
+                \item (encryption - $\ora_5$) on input the tuple $(\sattr, \raccess, \msg)$, computes a valid ciphertext $\cipher' \getsr \enc'(\ek'_\sattr, \raccess, \msg)$, for some $\ek'_\sattr \getsr \skgen'(\msk, \sattr)$. Then returns $\cipher = (\cipher', \pi)$, for a simulated proof $\pi = \nizksim_1(\tpsim, \cipher')$.
                 \item (challenge) on input $((\cipher', \pi), \rattr, \saccess)$, extracts $(\sattr, \signature)$, running $\nizkext_1(\tpext, \cipher', \pi)$, and forwards the tuple to the challenger.
             \end{enumerate}
-
-            First of all, note that on setup $\adversary'$ simulates an honest challenger for $\adversary$ in all but a single event: the setup of the CRS $\crs$, indeed, is done through $\nizkext_0$, which allows $\adversary'$ to obtain the useful trapdoors. But this, clearly, does not alter (except with some negligible probability) the view of $\adversary$, because of the assumption of true-simulation extractability of $\nizk$: moreover, for the very same reason, the distribution of the proofs generated by $\ora_5$ is computationally close to the original one.
+            First of all, note that on setup $\adversary'$ simulates an honest challenger for $\adversary$ in all but a single event: the setup of the CRS $\crs$, indeed, is done through $\nizkext_0$, which allows $\adversary'$ to obtain the useful trapdoors.
+            But this, clearly, does not alter (except with some negligible probability) the view of $\adversary$, because of the assumption of true-simulation extractability of $\nizk$: moreover, for the very same reason, the distribution of the proofs generated by $\ora_5$ is computationally close to the original one.
             The simulation of $\ora_2$ and $\ora_3$ is tight, since they only require keys honestly generated by $\adversary'$.
             Also $\ora_1$ queries are perfectly simulated, because of the powerful $\ora_\sign$ offered by the challenger, which allows $\adversary'$ to compute a valid signature on the sender attributes, thus preserving the correctness.
-
+            ~\newline\newline
             So, by assumption, $\adversary$ wins the game with some non negligible probability, thus producing a tuple $((\cipher', \pi), \rattr, \saccess)$; in order to be acceptable, such tuple should be such that the proof is accepted and, except with some negligible probability, the extractor $\nizkext_1$ is able to reconstruct the sender attributes $\sattr$ and a valid $\signature$ on the very same attributes.
             Note that, since $\adversary$ is valid, $\adversary'$ never queries $\ora_\sign(\sattr)$: so $(\sattr, \signature)$ is a valid forgery for $\Sigeufgame_{\sig, \adversary'}(\secpar)$.
         \end{proof}
@@ -64,19 +62,20 @@ The correctness of the scheme follows directly by the correctness of the underly
 
             \begin{enumerate}
                 \item (setup) $\adversary'$ receives the master public key $\mpk'$ from the challenger. Then it computes $(\crs,\tpsim,\tpext)\getsr\nizkext_0(\secparam)$, the signatures keys $(\sk, \pk) \getsr \kgen(\secparam)$ and gives $\adversary$ the new master public key $\mpk = (\mpk', \pk, \crs)$.
-                \item ($\ora_1$) on input $\sattr$, $\adversary'$ invokes $\ora_1(\sattr)$ to have back $\ek'_\sattr$; moreover it runs $\signature \getsr \sign(\sk, \sattr)$. Then it gives $\adversary$ the new sender key $\ek_\sattr = (\ek'_\sattr, \signature)$.
+                \item ($\ora_1$) on input $\sattr$, $\adversary'$ invokes $\ora_1(\sattr)$ to have back $\ek'_\sattr$; moreover, it computes $\signature \getsr \sign(\sk, \sattr)$. Then it gives $\adversary$ the new sender key $\ek_\sattr = (\ek'_\sattr, \signature)$.
                 \item ($\ora_2$) on input $\rattr$, $\adversary'$ invokes $\ora_2(\rattr)$ and forwards the received $\ek'_\rattr$.
                 \item ($\ora_3$) on input $\saccess$, $\adversary'$ invokes $\ora_3(\saccess)$ and simply forwards the received $\ek'_\saccess$.
                 \item (decryption - $\ora_4$) on input $(\rattr, \saccess, (\cipher', \pi))$, it first parses the ciphertext and checks whether the proof $\pi$ is valid or not (in this case simply outputs $\bot$). Then, extracts $(\sattr, \signature, \raccess, \msg)$ using $\nizkext_1(\tpext,\cipher',\pi)$ and if there is a match returns $\msg$, otherwise returns $\bot$.
                 \item (challenge) the input tuple is passed to the challenger that computes $\cipher'_b$; $\adversary'$ returns back $(\cipher'_b, \pi)$, where $\pi = \nizksim_1(\tpsim, \cipher'_b)$ is a simulated proof for $\cipher'_b$.
                 \item (output) the bit $b'$ is given to the challenger.
             \end{enumerate}
-
+            ~\newline
             The view offered by $\adversary'$ to $\adversary$ is computationally close to the original one: the difference, again, is due to the different mechanism to generate the CRS $\crs$, but this cannot be distinguished by $\adversary$, because of the assumption of f-tSE of $\nizk$.
             Oracles $\ora_2$ and $\ora_3$ are perfectly simulated, since they are offered directly by the challenger.
             $\ora_1$ queries are again perfectly simulated, because the sender key is honestly generated by the challenger and the signature is valid (and verifiable by $\adversary$).
             By assumtpion, $\ora_4$ queries are perfectly simulated except with some negligible probability, due to the failure of the extractor $\nizkext_1(\tpext, \cdot, \cdot)$: the correctness is still preserved because $\adversary'$ can extract all the necessary information to succesfully decrypt a message if and only if a match occurs.
         \end{proof}
     \end{lemma}
+    ~\newline
     Since we have shown that Construction ~\ref{constr:me_nizk} achieves both CCA-privacy and CCA-authenticity, we have concluded the proof.
 \end{proof}

@@ -1,6 +1,8 @@
 \section{Notation}
-We use the notation $[n] \eqdef \{1,\ldots,n\}$. Capital boldface letters (such as $\rv{X}$) are used to denote random variables, small letters (such as $x$) to denote concrete values, calligraphic letters (such as $ \cX$) to denote sets, and serif letters (such as $\alg{A}$) to denote algorithms. All of our algorithms are modeled as (possibly interactive) Turing machines;
-if algorithm $\alg{A}=(\alg{A_1},\ldots,\alg{A_k})$ has oracle access to some oracle $\alg{O}$, we often implicitly write $\mathcal{Q}_{\alg{O}}$ for the set of queries asked by $\alg{A}$ to $\alg{O}$ and $\mathcal{Q}_{\alg{O}}^i$ for the set of queries asked by $\alg{A_i}$ to $\alg{O}$. Furthermore, we denote by $\mathcal{O}_{\alg{O}}$ (resp. $\mathcal{O}_{\alg{O}}^i$) the set of outputs returned to $\alg{A}$ (resp. $\alg{A}^i$) by $\alg{O}$.
+We use the notation $[n] \eqdef \{1,\ldots,n\}$.
+Capital boldface letters (such as $\rv{X}$) are used to denote random variables, small letters (such as $x$) to denote concrete values, calligraphic letters (such as $ \cX$) to denote sets, and serif letters (such as $\alg{A}$) to denote algorithms.
+All of our algorithms are modeled as (possibly interactive) Turing machines; if algorithm $\alg{A}=(\alg{A_1},\ldots,\alg{A_k})$ has oracle access to some oracle $\alg{O}$, we often implicitly write $\mathcal{Q}_{\alg{O}}$ for the set of queries asked by $\alg{A}$ to $\alg{O}$ and $\mathcal{Q}_{\alg{O}}^i$ for the set of queries asked by $\alg{A_i}$ to $\alg{O}$.
+Furthermore, we denote by $\mathcal{O}_{\alg{O}}$ (resp. $\mathcal{O}_{\alg{O}}^i$) the set of outputs returned to $\alg{A}$ (resp. $\alg{A}^i$) by $\alg{O}$.
 \newline\newline
 For a string $x\in\bin^*$, we let $|x|$ be its length; if $\cX$ is a set, $|\cX|$ represents the cardinality of $\cX$.
 When $x$ is chosen randomly in $\cX$, we write $x \getsr \cX$. If $\alg{A}$ is an algorithm, we write $y \getsr \alg{A}(x)$ to denote a run of $\alg{A}$ on input $x$ and output $y$; if $\alg{A}$ is randomized, $y$ is a random variable and $\alg{A}(x;r)$ denotes a run of $\alg{A}$ on input $x$ and (uniform) randomness $r$.
