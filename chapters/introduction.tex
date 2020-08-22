@@ -59,8 +59,7 @@ We studied CCA security both for ME and A-ME, to capture stronger security guara
 Indeed, CCA security is of seminal importance in many practical situations: e.g. in 1998 Bleichenbacher showed how to crack an SSL session key in less than a day, simply sending several ciphertexts to a decryption device \cite{Bleichenbacher}.
 
 \paragraph{Constructions}
-We finally define black-box constructions to transform any CPA-secure ME (resp. A-ME) scheme into a CCA-private ME (resp. A-ME) scheme, by relying on a Non-Interactive Zero-Knowledge (NIZK) argument system and a Signatures scheme.
+We define black-box constructions to achieve CCA-privacy (cf.\ \S\ref{sec:cca-priv-transformation}) and CCA-authenticity (cf.\ \S\ref{sec:cca-auth-transformation}), by relying on a Non-Interactive Zero-Knowledge (NIZK) argument system and a Signatures scheme.
+We finally define black-box constructions to directly transform any CPA-secure ME (resp. A-ME) scheme into a CCA-private ME (resp. A-ME) scheme, again based on a NIZK argument system and Digital Signatures (cf.\ \S\ref{sec:cca-full-transformation}).
 \newline\newline
-In our construction (cf.\ \S\ref{sec:cca-transformation}), to encrypt message $m$ under sender attributes $\sigma$ and policy $\mathbb{R}$ we proceed as follows: we first encrypt $m$ using the underlying ME (resp. A-ME) scheme; then we add a NIZK argument of the knowledge of the plaintext $m$ and a valid signature $s$ on $\sigma$, where the signature is provided by a trusted party.
-\newline
-We prove that these two constructions achieve CCA-privacy and preserve the authenticity of the underlying schemes.
+In particular, in our transformation (cf.\ \S\ref{sec:cca-transformation}), to encrypt message $\msg$ under sender attributes $\sattr$ and policy $\raccess$ we proceed as follows: we first encrypt $\msg$ using the underlying ME (resp. A-ME) scheme; then we add a NIZK argument of the knowledge of the plaintext $\msg$ and a valid signature $\signature$ on $\sattr$, where the signature is provided by a trusted party.

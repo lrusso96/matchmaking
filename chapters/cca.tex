@@ -1,5 +1,4 @@
 \chapter{Chosen-Ciphertext Attacks Security}
-
 In this chapter we extend the security definitions of an ME to the setting of chosen-ciphertext attacks (CCA).
 As in the original definition, security is defined via two properties: privacy and authenticity.
 
@@ -26,7 +25,6 @@ We introduce the formal definition of CCA privacy below for ME (Definition \ref{
 \input{chapters/cca/ame/auth-def.tex}
 
 \section{CPA to CCA Transformation}\label{sec:cca-transformation}
-
 We are going to define:
 \begin{itemize}
     \item a first black-box transformation from CPA to CCA privacy, while preserving the authenticity
@@ -34,26 +32,39 @@ We are going to define:
 \end{itemize}
 ~\newline
 It is evident that in order to achieve CCA security, we can simply apply both of these transformations in sequence: however, for sake of convenience, we will present a more efficient one which directly achieves both CCA privacy and CCA authenticity.
+Figure \ref{fig:constr} gives a visual representation of the transformations presented in this thesis, explaining how to achieve CCA.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/constr.png}
+    \caption{CCA Transormations Lattice. P represents Privacy, while A stands for Authenticity; the small letter indicates CPA, while the capital letter indicates CCA; the numbers refer to the corresponding theorem.}
+    \label{fig:constr}
+\end{figure}
 \newline\newline
 The starting point for our transformations are the following constructions, based on Digital Signatures and NIZK.
 \input{chapters/cca/me/construction.tex}
 \input{chapters/cca/ame/construction.tex}
+~\newline
+We also give two simple variants which do not require any Signatures Scheme.
+\input{chapters/cca/me/construction-priv.tex}
+\input{chapters/cca/ame/construction-priv.tex}
+~\newline
+The correctness of all the previous schemes follows directly by the correctness of the underlying ME (resp. A-ME) schemes.
 
-\subsection{CCA privacy}
+\subsection{CCA privacy}\label{sec:cca-priv-transformation}
 We define a black-box construction to transform any CPA-private ME scheme into a CCA-private ME scheme, using construction~\ref{constr:me_nizk}.
-\input{chapters/cca/me/priv-construction.tex}
+\input{chapters/cca/me/priv-transformation.tex}
 ~\newline
 In order to achieve CCA-private A-ME schemes, we can rely on construction~\ref{constr:ame_nizk} and define the following transormation.
-\input{chapters/cca/ame/priv-construction.tex}
+\input{chapters/cca/ame/priv-transformation.tex}
 
-\subsection{CCA authenticity}
+\subsection{CCA authenticity}\label{sec:cca-auth-transformation}
 We define a black-box construction to achieve CCA-authenticity, using construction~\ref{constr:me_nizk}.
-\input{chapters/cca/me/auth-construction.tex}
+\input{chapters/cca/me/auth-transformation.tex}
 ~\newline
 We present here how to achieve CCA-authenticity for A-ME, using construction~\ref{constr:ame_nizk}.
-\input{chapters/cca/ame/auth-construction.tex}
+\input{chapters/cca/ame/auth-transformation.tex}
 
-\subsection{Direct Transformation}
+\subsection{Direct Transformation}\label{sec:cca-full-transformation}
 We now define a black-box construction to transform any CPA-secure ME scheme into a CCA-secure ME scheme, by relying on construction~\ref{constr:me_nizk}.
 \input{chapters/cca/me/full-constr.tex}
 ~\newline
