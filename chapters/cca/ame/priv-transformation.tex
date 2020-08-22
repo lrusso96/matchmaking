@@ -1,16 +1,15 @@
 \begin{theorem}\label{theo:ame_nizk_priv}
-    Let $\Pi', \sig, \nizk$ be as above.
-    If $\Pi'$ is CPA private, $\sig$ is EUF-CMA secure and $\nizk$ satisfies true-simulation extractability for $f(\sattr, \signature, \raccess, \msg, r) = (\sattr, \raccess, \msg)$, then the ME scheme $\Pi$ from construction~\ref{constr:ame_nizk} is CCA-private and preserves its authenticity.
+    Let $\Pi', \nizk$ be as above.
+    If $\Pi'$ is CPA private, and $\nizk$ satisfies true-simulation extractability for $f(\sattr, \signature, \raccess, \msg, r) = (\sattr, \raccess, \msg)$, then the ME scheme $\Pi$ from construction~\ref{constr:ame_nizk} is CCA-private and preserves its authenticity.
 \end{theorem}
 
 \begin{proof}
     We can separately prove the two properties, by using Lemma~\ref{lemma:ame_priv} and Lemma~\ref{lemma:ame_auth_same}
 
-
     \begin{lemma}\label{lemma:ame_priv}
-        Construction~\ref{constr:ame_nizk} achieves CCA privacy.
+        Constructions~\ref{constr:ame_nizk} and \ref{constr:ame_nizk_priv} achieve CCA privacy.
         \begin{proof}
-            As before, this proof is almost the same as Lemma ~\ref{lemma:me_priv}: the only difference is that here we do not need to simulate anymore the generation of the policy keys.
+            As before, this proof is almost the same as Lemma ~\ref{lemma:me_priv} (wlog, we only proove the lemma for construction~\ref{constr:ame_nizk}): the only difference is that here we do not need to simulate anymore the generation of the policy keys.
             Let assume that $\Pi$ does not achieve CCA-privacy. This implies that there exists a valid $\adversary$ able to win with non negligible probability $\NISHmatchgamecca{\arranged}_{\Pi, \adversary}(\secpar)$. If this is the case, we can build a valid $\adversary'$ to win with non negligible probability $\NISHmatchgame{\arranged}_{\Pi', \adversary}(\secpar)$. The reduction is the following.
 
             \begin{enumerate}
@@ -30,7 +29,7 @@
     \end{lemma}
 
     \begin{lemma}\label{lemma:ame_auth_same}
-        Construction~\ref{constr:me_nizk} preserves its authenticity.
+        Construction~\ref{constr:ame_nizk} preserves its authenticity.
         \begin{proof}
             Let assume $\Pi$ does not preserve its authenticity. This implies that there exists a valid $\adversary$ able to win with non negligible probability $\NISHeufgame{\arranged}_{\Pi, \adversary}(\secpar)$ (resp. $\NISHeufgamecca{\arranged}_{\Pi, \adversary}(\secpar)$). If this is the case, we can build a valid $\adversary'$ to win with non negligible probability $\NISHeufgame{\arranged}_{\Pi', \adversary}(\secpar)$ (resp. $\NISHeufgamecca{\arranged}_{\Pi', \adversary}(\secpar)$). The reduction is the following.
 
@@ -41,8 +40,7 @@
                 \item (encryption - $\ora_4$)\footnote{only for CCA game} invokes $\ora_4(\rattr)$ and forwards the received ciphertext $\cipher$.
                 \item (challenge) on input $((\cipher', \pi), \rattr, \saccess)$, forwards the tuple $(\cipher, \rattr, \saccess)$ to the challenger.
             \end{enumerate}
-            \todo[inline]{Some more details?}
         \end{proof}
     \end{lemma}
-    Since we have shown that Construction~\ref{constr:ame_nizk} achieves CCA-privacy and preserves its authenticity, we have concluded the proof.
+    Since we have shown that Construction~\ref{constr:ame_nizk_priv} achieves CCA-privacy and preserves its authenticity, we have concluded the proof.
 \end{proof}

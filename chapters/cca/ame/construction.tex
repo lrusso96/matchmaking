@@ -17,5 +17,3 @@
         \item[$\dec(\dk_{\rattr, \saccess}, \cipher)$:] the deterministic decryption algorithm takes as input a decryption key $\dk_{\rattr, \saccess}$ and a ciphertext $\cipher = (\cipher', \pi)$. The algorithm first checks whether $\verifier(\crs, (\cipher', \pk, \mpk'), \pi) = 0$. If true, returns $\bot$; else it returns $\dec'(\dk'_{\rattr, \saccess}, \cipher')$.
     \end{description}
 \end{construction}
-~\newline
-The correctness of the scheme follows directly by the correctness of the underlying A-ME scheme.
