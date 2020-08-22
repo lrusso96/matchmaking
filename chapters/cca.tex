@@ -26,8 +26,36 @@ We introduce the formal definition of CCA privacy below for ME (Definition \ref{
 \input{chapters/cca/ame/auth-def.tex}
 
 \section{CPA to CCA Transformation}\label{sec:cca-transformation}
-We now define a black-box construction to transform any CPA-secure ME scheme into a CCA-private ME scheme, by relying on a Non-Interactive Zero-Knowledge (NIZK) argument system and a Signatures scheme.
-We also propose a similar black-box contruction for A-ME schemes.
 
+We are going to define:
+\begin{itemize}
+    \item a first black-box transformation from CPA to CCA privacy, while preserving the authenticity
+    \item a second black-box transformation from CPA to CCA authenticity, while preserving privacy
+\end{itemize}
+~\newline
+It is evident that in order to achieve CCA security, we can simply apply both of these transformations in sequence: however, for sake of convenience, we will present a more efficient one which directly achieves both CCA privacy and CCA authenticity.
+\newline\newline
+The starting point for our transformations are the following constructions, based on Digital Signatures and NIZK.
 \input{chapters/cca/me/construction.tex}
 \input{chapters/cca/ame/construction.tex}
+
+\subsection{CCA privacy}
+We define a black-box construction to transform any CPA-private ME scheme into a CCA-private ME scheme, using construction~\ref{constr:me_nizk}.
+\input{chapters/cca/me/priv-construction.tex}
+~\newline
+In order to achieve CCA-private A-ME schemes, we can rely on construction~\ref{constr:ame_nizk} and define the following transormation.
+\input{chapters/cca/ame/priv-construction.tex}
+
+\subsection{CCA authenticity}
+We define a black-box construction to achieve CCA-authenticity, using construction~\ref{constr:me_nizk}.
+\input{chapters/cca/me/auth-construction.tex}
+~\newline
+We present here how to achieve CCA-authenticity for A-ME, using construction~\ref{constr:ame_nizk}.
+\input{chapters/cca/ame/auth-construction.tex}
+
+\subsection{Direct Transformation}
+We now define a black-box construction to transform any CPA-secure ME scheme into a CCA-secure ME scheme, by relying on construction~\ref{constr:me_nizk}.
+\input{chapters/cca/me/full-constr.tex}
+~\newline
+For A-ME schemes we can do the same, using again construction~\ref{constr:ame_nizk} as starting point.
+\input{chapters/cca/ame/full-constr.tex}
