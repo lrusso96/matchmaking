@@ -1,14 +1,15 @@
 \begin{theorem}\label{theo:me_nizk_priv}
-    Let $\Pi', \sig, \nizk$ be as above.
-    If $\Pi'$ is CPA private, $\sig$ is EUF-CMA secure and $\nizk$ satisfies true-simulation extractability for $f(\sattr, \signature, \raccess, \msg, r) = (\sattr, \raccess, \msg)$, then the ME scheme $\Pi$ from construction~\ref{constr:me_nizk} is CCA-private and preserves its authenticity.
+    Let $\Pi', \nizk$ be as above.
+    If $\Pi'$ is CPA private, and $\nizk$ satisfies true-simulation extractability for $f(\sattr, \raccess, \msg, r) = (\sattr, \raccess, \msg)$, then the ME scheme $\Pi$ from construction~\ref{constr:me_nizk} is CCA-private and preserves its authenticity.
 \end{theorem}
 
 \begin{proof}
-    We can separately prove the two properties, by using Lemma~\ref{lemma:me_priv} and Lemma~\ref{lemma:me_auth_same}
+    We can separately prove the two properties, by using Lemma~\ref{lemma:me_priv} and Lemma~\ref{lemma:me_auth_same}.
 
     \begin{lemma}\label{lemma:me_priv}
-        Construction~\ref{constr:me_nizk} achieves CCA privacy if $f$ can extract the sender attributes $\sattr$, the policy $\raccess$ and the message $\msg$.
+        Constructions~\ref{constr:me_nizk} and \ref{constr:me_nizk_priv}  achieve CCA privacy if $f$ can extract the sender attributes $\sattr$, the policy $\raccess$ and the message $\msg$.
         \begin{proof}
+            Without loss of generality, we give the proof for construction~\ref{constr:me_nizk} only: the other case is implied since it is a subcase.
             Let assume that $\Pi$ does not achieve CCA-privacy. This implies that there exists a valid $\adversary$ able to win with non negligible probability $\NISHmatchgamecca{}_{\Pi, \adversary}(\secpar)$. If this is the case, we can build a valid $\adversary'$ to win with non negligible probability $\NISHmatchgame{}_{\Pi', \adversary}(\secpar)$. The reduction is the following.
 
             \begin{enumerate}
@@ -29,20 +30,19 @@
     \end{lemma}
 
     \begin{lemma}\label{lemma:me_auth_same}
-        Construction~\ref{constr:me_nizk} preserves its authenticity.
+        Construction~\ref{constr:me_nizk_priv} preserves its authenticity.
         \begin{proof}
             Let assume $\Pi$ does not preserve its authenticity. This implies that there exists a valid $\adversary$ able to win with non negligible probability $\NISHeufgame{}_{\Pi, \adversary}(\secpar)$ (resp. $\NISHeufgamecca{}_{\Pi, \adversary}(\secpar)$). If this is the case, we can build a valid $\adversary'$ to win with non negligible probability $\NISHeufgame{}_{\Pi', \adversary}(\secpar)$ (resp. $\NISHeufgamecca{}_{\Pi', \adversary}(\secpar)$). The reduction is the following.
 
             \begin{enumerate}
-                \item (setup) $\adversary'$ receives the master public key $\mpk'$ from the challenger. Then it computes $(\crs,\tpsim,\tpext)\getsr\nizkext_0(\secparam)$, the signatures keys $(\sk, \pk) \getsr \kgen(\secparam)$ and gives $\adversary$ the new master public key $\mpk = (\mpk', \pk, \crs)$.
-                \item ($\ora_1$) on input $\sattr$, $\adversary'$ invokes \item ($\ora_1$) on input $\sattr$, $\adversary'$ invokes $\ora_1(\sattr)$ to have back $\ek'_\sattr$; moreover, it computes $\signature \getsr \sign(\sk, \sattr)$. Then it gives $\adversary$ the new sender key $\ek_\sattr = (\ek'_\sattr, \signature)$.
+                \item (setup) $\adversary'$ receives the master public key $\mpk'$ from the challenger. Then it computes $(\crs,\tpsim,\tpext)\getsr\nizkext_0(\secparam)$, and gives $\adversary$ the new master public key $\mpk = (\mpk', \crs)$.
+                \item ($\ora_1$) on input $\sattr$, $\adversary'$ invokes \item ($\ora_1$) on input $\sattr$, $\adversary'$ invokes $\ora_1(\sattr)$ to have back the sender key $\ek_\sattr$ which is forwarded to the $\adversary$.
                 \item ($\ora_2$) on input $\rattr$, $\adversary'$ invokes $\ora_2(\rattr)$ and forwards the received $\ek'_\rattr$.
                 \item ($\ora_3$) on input $\saccess$, $\adversary'$ invokes $\ora_3(\saccess)$ and simply forwards the received $\ek'_\saccess$.
                 \item (encryption - $\ora_5$)\footnote{only for CCA game} invokes $\ora_5(\rattr)$ and forwards the received ciphertext $\cipher$.
                 \item (challenge) on input $((\cipher', \pi), \rattr, \saccess)$, forwards the tuple $(\cipher, \rattr, \saccess)$ to the challenger.
             \end{enumerate}
-            \todo[inline]{Some more details?}
         \end{proof}
     \end{lemma}
-    Since we have shown that Construction~\ref{constr:me_nizk} achieves CCA-privacy and preserves its authenticity, we have concluded the proof.
+    Since we have shown that Construction~\ref{constr:me_nizk_priv} achieves CCA-privacy and preserves its authenticity, we have concluded the proof.
 \end{proof}

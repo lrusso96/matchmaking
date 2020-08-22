@@ -18,5 +18,3 @@
         \item[$\dec(\dk_\rattr, \dk_\saccess, \cipher)$:] the deterministic decryption algorithm takes as input a secret decryption key $\dk_\rattr = \dk'_\rattr$, a secret decryption key $\dk_\saccess = \dk'_\saccess$ for a circuit $\saccess: \bin^* \to \bin$ and a ciphertext $\cipher = (\cipher', \pi)$. The algorithm first checks whether $\verifier(\crs, (\cipher', \pk, \mpk'), \pi) = 0$: if true, it simply returns $\bot$; otherwise, it returns $\dec'(\dk'_\rattr, \dk_\saccess, \cipher')$.
     \end{description}
 \end{construction}
-~\newline
-The correctness of the scheme follows directly by the correctness of the underlying ME scheme.
