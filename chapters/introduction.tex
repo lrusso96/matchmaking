@@ -7,11 +7,12 @@ ME can be extremely useful in order to avoid liability or inappropriateness; ind
     \item encrypting bids and votes
     \item censorship-resistant communication for marginalized communities in authoritarian countries.
 \end{itemize}
-In particular, in this context, we consider two parties: the sender S with attributes $\sigma$ and the receiver R with attributes $\rho$.
+In particular, in this context, we consider two parties: the sender Alice with attributes $\sigma$ and the receiver Bob with attributes $\rho$.
 They can both specify policies (i.e. access rights expressed in terms of attributes) the other party must satisfy in order for the message to be revealed.
 The policies are represented as circuits $\mathbb{C} : \{0, 1\}^* \to \{0, 1\}$, while the attributes are binary strings of arbitrary length.
-For instance, in the social matchmaking setting, S can encrypt a message $m$ containing his personal details and specify a policy $\mathbb{R}$ so that the message can be decrypted only by his ideal partner, i.e. one who matches the policy.
-On the other end, R will be able to decrypt the message only if S corresponds to his ideal partner: this is again expressed through a policy $\mathbb{S}$. The decryption is successful if $\mathbb{S}(\sigma) = \mathbb{R}(\rho) = 1$, i.e. both the policies are matched.
+For instance, in the social matchmaking setting, Alice can encrypt a message $m$ containing her personal details and specify a policy $\mathbb{R}$ so that the message can be decrypted only by his ideal partner, i.e. one who matches the policy.
+On the other end, Bob will be able to decrypt the message only if Alice corresponds to his ideal partner: this is again expressed through a policy $\mathbb{S}$.
+The decryption is successful if $\saccess(\sattr) = \raccess(\rattr) = 1$, i.e. both the policies are matched.
 \newline\newline
 In Matchmaking Encryption, a trusted authority generates encryption and decryption keys associated, respectively, to attributes of the sender and the receiver.
 The authority also generates an additional decryption key for the receiver, associated to an arbitrary policy of its choice.

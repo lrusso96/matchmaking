@@ -1,13 +1,33 @@
 \chapter{Chosen-Ciphertext Attacks Security}
 
+In this chapter we extend the security definitions of an ME to the setting of chosen-ciphertext attacks (CCA).
+As in the original definition, security is defined via two properties: privacy and authenticity.
+
 \section{Privacy}\label{sec:cca-privacy}
+We want privacy to capture secrecy of the sender's inputs (i.e., the attributes $\sattr$, the policy for the receiver $\raccess$, and the plaintext $\msg$), in two different scenarios: in case of a match between the sender's and receiver's attributes/policy, and in case of mismatch.
+More formally, we require that the distributions $\enc(\ek_{\sattr_0}, \raccess_0, \msg_0)$ and $\enc(\ek_{\sattr_1}, \raccess_1, \msg_1)$ are computationally indistinguishable to the eyes of an attacker with oracle access to $\skgen$, $\rkgen$, $\polgen$, where the values $(m_0, m_1,\raccess_0, \raccess_1, \sattr_0, \sattr_1)$ are all chosen by the adversary.
+In order to exclude some trivial attacks, it is necessary to quantify privacy over all valid adversaries, as explained in \cite{Ateniese}.
+\newline\newline
+In this thesis, we aim at extending the power and the flexibility of the attacker, providing an oracle access to $\dec(\dk_\rattr, \dk_\saccess, \cipher)$, where the input is controlled by the attacker: clearly, we need to exclude the trivial attack of exploiting the oracle to directly decrypt the challenge chipertext\footnote{This is standard in CCA games definitions.}.
+We introduce the formal definition of CCA privacy below for ME (Definition \ref{def:me_priv}) and A-ME too (Definition \ref{def:ame_priv}).
+
 \input{chapters/cca/me/priv-def}
 \input{chapters/cca/ame/priv-def}
 
 \section{Authenticity}\label{sec:cca-auth}
+Authenticity, instead, demands that the only way to produce a valid ciphertext under sender attributes $\sattr$ is to obtain an encryption key $ek_\sattr$ from the authority, thus guaranteeing that if a ciphertext decrypts correctly, then it has been created by a sender with the proper encryption key. This captures security against malicious senders and is modeled by a game in which the attacker has oracle access to $\skgen$, $\rkgen$, and $\polgen$.
+The attacker's goal is to output a tuple $(\rattr, \saccess, \cipher)$ such that $\dec(dk_\rattr, \dk_\saccess, \cipher) \not= \bot$, and none of the encryption keys $ek_\sattr$ for attributes $\sattr$ (obtained by the adversary via oracle queries) satisfies the policy $\saccess$.
+\newline\newline
+The adversary is now given access to an encryption oracle: given in input sender attributes $\sattr$, a policy $\raccess$ and a message $m$, the attacker can compute an honestly generated ciphertext $\cipher$, without the need to obtain an encryption key $\ek_\sattr$ from the authority.
+We clearly need to avoid trivial attacks: we do not allow the attacker to return as challenge ciphertext one provided by the oracle.
+We introduce the formal definition of CCA privacy below for ME (Definition \ref{def:me_auth}) and A-ME too (Definition \ref{def:ame_auth}).
+
 \input{chapters/cca/me/auth-def.tex}
 \input{chapters/cca/ame/auth-def.tex}
 
 \section{CPA to CCA Transformation}\label{sec:cca-transformation}
+We now define a black-box construction to transform any CPA-secure ME scheme into a CCA-private ME scheme, by relying on a Non-Interactive Zero-Knowledge (NIZK) argument system and a Signatures scheme.
+We also propose a similar black-box contruction for A-ME schemes.
+
 \input{chapters/cca/me/construction.tex}
 \input{chapters/cca/ame/construction.tex}
