@@ -1,5 +1,5 @@
 \chapter{Chosen-Ciphertext Attacks Security}
-In this chapter we extend the security definitions of an ME to the setting of chosen-ciphertext attacks (CCA).
+In this chapter, we extend the security definitions of an ME to the setting of chosen-ciphertext attacks (CCA).
 As in the original definition, security is defined via two properties: privacy and authenticity.
 
 \section{Privacy}\label{sec:cca-privacy}
@@ -7,7 +7,7 @@ We want privacy to capture secrecy of the sender's inputs (i.e., the attributes 
 More formally, we require that the distributions $\enc(\ek_{\sattr_0}, \raccess_0, \msg_0)$ and $\enc(\ek_{\sattr_1}, \raccess_1, \msg_1)$ are computationally indistinguishable to the eyes of an attacker with oracle access to $\skgen$, $\rkgen$, $\polgen$, where the values $(m_0, m_1,\raccess_0, \raccess_1, \sattr_0, \sattr_1)$ are all chosen by the adversary.
 In order to exclude some trivial attacks, it is necessary to quantify privacy over all valid adversaries, as explained in \cite{Ateniese}.
 \newline\newline
-In this thesis, we aim at extending the power and the flexibility of the attacker, providing an oracle access to $\dec(\dk_\rattr, \dk_\saccess, \cipher)$, where the input is controlled by the attacker: clearly, we need to exclude the trivial attack of exploiting the oracle to directly decrypt the challenge chipertext\footnote{This is standard in CCA games definitions.}.
+In this thesis, we aim at extending the power and the flexibility of the attacker, providing oracle access to $\dec(\dk_\rattr, \dk_\saccess, \cipher)$, where the input is controlled by the attacker: clearly, we need to exclude the trivial attack of exploiting the oracle to directly decrypt the challenge chipertext\footnote{This is standard in CCA games definitions.}.
 We introduce the formal definition of CCA privacy below for ME (Definition \ref{def:me_priv}) and A-ME too (Definition \ref{def:ame_priv}).
 
 \input{chapters/cca/me/priv-def}
@@ -18,7 +18,7 @@ Authenticity, instead, demands that the only way to produce a valid ciphertext u
 The attacker's goal is to output a tuple $(\rattr, \saccess, \cipher)$ such that $\dec(dk_\rattr, \dk_\saccess, \cipher) \not= \bot$, and none of the encryption keys $ek_\sattr$ for attributes $\sattr$ (obtained by the adversary via oracle queries) satisfies the policy $\saccess$.
 \newline\newline
 The adversary is now given access to an encryption oracle: given in input sender attributes $\sattr$, a policy $\raccess$ and a message $m$, the attacker can compute an honestly generated ciphertext $\cipher$, without the need to obtain an encryption key $\ek_\sattr$ from the authority.
-We clearly need to avoid trivial attacks: we do not allow the attacker to return as challenge ciphertext one provided by the oracle.
+We need to avoid trivial attacks: we do not allow the attacker to return as the challenge ciphertext one provided by the oracle.
 We introduce the formal definition of CCA privacy below for ME (Definition \ref{def:me_auth}) and A-ME too (Definition \ref{def:ame_auth}).
 
 \input{chapters/cca/me/auth-def.tex}
@@ -28,19 +28,19 @@ We introduce the formal definition of CCA privacy below for ME (Definition \ref{
 We are going to define:
 \begin{itemize}
     \item a first black-box transformation from CPA to CCA privacy, while preserving the authenticity
-    \item a second black-box transformation from CPA to CCA authenticity, while preserving privacy
+    \item a second black-box transformation from CPA to CCA authenticity, while preserving the privacy
 \end{itemize}
 ~\newline
-It is evident that in order to achieve CCA security, we can simply apply both of these transformations in sequence: however, for sake of convenience, we will present a more efficient one which directly achieves both CCA privacy and CCA authenticity.
+It is evident that to achieve CCA security, we can simply apply both of these transformations in sequence: however, for sake of convenience, we will present a more efficient one that directly achieves both CCA privacy and CCA authenticity.
 Figure \ref{fig:constr} gives a visual representation of the transformations presented in this thesis, explaining how to achieve CCA.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.7\linewidth]{images/constr.png}
-    \caption{CCA Transormations Lattice. P represents Privacy, while A stands for Authenticity; the small letter indicates CPA, while the capital letter indicates CCA; the numbers refer to the corresponding theorem.}
+    \caption{CCA Transformations Lattice. P represents Privacy, while A stands for Authenticity; the small letter indicates CPA, while the capital letter indicates CCA; the numbers refer to the corresponding theorem.}
     \label{fig:constr}
 \end{figure}
 \newline\newline
-The starting point for our transformations are the following constructions, based on Digital Signatures and NIZK.
+The starting point for our transformations is given by the following constructions, based on Digital Signatures and NIZK.
 \input{chapters/cca/me/construction.tex}
 \input{chapters/cca/ame/construction.tex}
 ~\newline
@@ -54,7 +54,7 @@ The correctness of all the previous schemes follows directly by the correctness 
 We define a black-box construction to transform any CPA-private ME scheme into a CCA-private ME scheme, using construction~\ref{constr:me_nizk}.
 \input{chapters/cca/me/priv-transformation.tex}
 ~\newline
-In order to achieve CCA-private A-ME schemes, we can rely on construction~\ref{constr:ame_nizk} and define the following transormation.
+In order to achieve CCA-private A-ME schemes, we can rely on construction~\ref{constr:ame_nizk} and define the following transformation.
 \input{chapters/cca/ame/priv-transformation.tex}
 
 \subsection{CCA authenticity}\label{sec:cca-auth-transformation}
@@ -68,5 +68,5 @@ We present here how to achieve CCA-authenticity for A-ME, using construction~\re
 We now define a black-box construction to transform any CPA-secure ME scheme into a CCA-secure ME scheme, by relying on construction~\ref{constr:me_nizk}.
 \input{chapters/cca/me/full-constr.tex}
 ~\newline
-For A-ME schemes we can do the same, using again construction~\ref{constr:ame_nizk} as starting point.
+For A-ME schemes we can do the same, using again construction~\ref{constr:ame_nizk} as the starting point.
 \input{chapters/cca/ame/full-constr.tex}

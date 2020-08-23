@@ -6,6 +6,8 @@ Furthermore, we denote by $\mathcal{O}_{\alg{O}}$ (resp. $\mathcal{O}_{\alg{O}}^
 \newline\newline
 For a string $x\in\bin^*$, we let $|x|$ be its length; if $\cX$ is a set, $|\cX|$ represents the cardinality of $\cX$.
 When $x$ is chosen randomly in $\cX$, we write $x \getsr \cX$. If $\alg{A}$ is an algorithm, we write $y \getsr \alg{A}(x)$ to denote a run of $\alg{A}$ on input $x$ and output $y$; if $\alg{A}$ is randomized, $y$ is a random variable and $\alg{A}(x;r)$ denotes a run of $\alg{A}$ on input $x$ and (uniform) randomness $r$.
+
+\paragraph*{PPT.}
 An algorithm $\alg{A}$ is \emph{probabilistic polynomial-time} (PPT) if $\alg{A}$ is randomized and for any input $x,r\in\bin^*$ the computation of $\alg{A}(x;r)$ terminates in a polynomial number of steps (in the input size).
 
 \paragraph*{Negligible functions.}
