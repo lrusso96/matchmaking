@@ -1,6 +1,6 @@
 \begin{theorem}\label{theo:ame_nizk}
     Let $\Pi', \sig, \nizk$ be as above.
-    If $\Pi'$ is CPA private, $\sig$ is EUF-CMA secure and $\nizk$ satisfies true-simulation extractability for $f(\sattr, \signature, \raccess, \msg, r) = (\sattr, \signature, \raccess, \msg)$, then the ME scheme $\Pi$ from construction~\ref{constr:ame_nizk} is CCA-secure.
+    If $\Pi'$ is CPA private, $\sig$ is EUF-CMA secure and $\nizk$ satisfies true-simulation extractability for $f$ such that $f(\sattr, \signature, \raccess, \msg, r) = (\sattr, \signature, \raccess, \msg)$, then the ME scheme $\Pi$ from construction~\ref{constr:ame_nizk} is CCA-secure.
 \end{theorem}
 
 \begin{proof}

@@ -10,7 +10,10 @@
         Constructions~\ref{constr:ame_nizk} and \ref{constr:ame_nizk_priv} achieve CCA privacy.
         \begin{proof}
             As before, this proof is almost the same as Lemma ~\ref{lemma:me_priv} (wlog, we only prove the lemma for construction~\ref{constr:ame_nizk}): the only difference is that here we do not need to simulate anymore the generation of the policy keys.
-            Let assume that $\Pi$ does not achieve CCA-privacy. This implies that there exists a valid $\adversary$ able to win with non-negligible probability $\NISHmatchgamecca{\arranged}_{\Pi, \adversary}(\secpar)$. If this is the case, we can build a valid $\adversary'$ to win with non-negligible probability $\NISHmatchgame{\arranged}_{\Pi', \adversary}(\secpar)$. The reduction is the following.
+            Let assume that $\Pi$ does not achieve CCA-privacy.
+            This implies that there exists a valid $\adversary$ able to win with non-negligible probability $\NISHmatchgamecca{\arranged}_{\Pi, \adversary}(\secpar)$.
+            If this is the case, we can build a valid $\adversary'$ to win with non-negligible probability $\NISHmatchgame{\arranged}_{\Pi', \adversary'}(\secpar)$.
+            The reduction is the following.
 
             \begin{enumerate}
                 \item (setup) $\adversary'$ receives the master public key $\mpk'$ from the challenger. Then it computes $(\crs,\tpsim,\tpext)\getsr\nizkext_0(\secparam)$, the signatures keys $(\sk, \pk) \getsr \kgen(\secparam)$ and gives $\adversary$ the new master public key $\mpk = (\mpk', \pk, \crs)$.
@@ -31,7 +34,10 @@
     \begin{lemma}\label{lemma:ame_auth_same}
         Construction~\ref{constr:ame_nizk} preserves its authenticity.
         \begin{proof}
-            Let assume $\Pi$ does not preserve its authenticity. This implies that there exists a valid $\adversary$ able to win with non negligible probability $\NISHeufgame{\arranged}_{\Pi, \adversary}(\secpar)$ (resp. $\NISHeufgamecca{\arranged}_{\Pi, \adversary}(\secpar)$). If this is the case, we can build a valid $\adversary'$ to win with non negligible probability $\NISHeufgame{\arranged}_{\Pi', \adversary}(\secpar)$ (resp. $\NISHeufgamecca{\arranged}_{\Pi', \adversary}(\secpar)$). The reduction is the following.
+            Let assume $\Pi$ does not preserve its authenticity.
+            This implies that there exists a valid $\adversary$ able to win with non negligible probability $\NISHeufgame{\arranged}_{\Pi, \adversary}(\secpar)$ (resp. $\NISHeufgamecca{\arranged}_{\Pi, \adversary}(\secpar)$).
+            If this is the case, we can build a valid $\adversary'$ to win with non negligible probability $\NISHeufgame{\arranged}_{\Pi', \adversary'}(\secpar)$ (resp. $\NISHeufgamecca{\arranged}_{\Pi', \adversary'}(\secpar)$).
+            The reduction is the following.
 
             \begin{enumerate}
                 \item (setup) $\adversary'$ receives the master public key $\mpk'$ from the challenger. Then it computes $(\crs,\tpsim,\tpext)\getsr\nizkext_0(\secparam)$, the signatures keys $(\sk, \pk) \getsr \kgen(\secparam)$ and gives $\adversary$ the new master public key $\mpk = (\mpk', \pk, \crs)$.

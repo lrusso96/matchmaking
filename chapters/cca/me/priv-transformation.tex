@@ -12,7 +12,7 @@
             Without loss of generality, we give the proof for construction~\ref{constr:me_nizk} only: the other case is implied since it is a subcase.
             Let assume that $\Pi$ does not achieve CCA-privacy.
             This implies that there exists a valid $\adversary$ able to win with non-negligible probability $\NISHmatchgamecca{}_{\Pi, \adversary}(\secpar)$.
-            If this is the case, we can build a valid $\adversary'$ to win with non-negligible probability $\NISHmatchgame{}_{\Pi', \adversary}(\secpar)$.
+            If this is the case, we can build a valid $\adversary'$ to win with non-negligible probability $\NISHmatchgame{}_{\Pi', \adversary'}(\secpar)$.
             The reduction is the following.
 
             \begin{enumerate}
@@ -37,7 +37,7 @@
         \begin{proof}
             Let assume $\Pi$ does not preserve its authenticity.
             This implies that there exists a valid $\adversary$ able to win with non negligible probability $\NISHeufgame{}_{\Pi, \adversary}(\secpar)$ (resp. $\NISHeufgamecca{}_{\Pi, \adversary}(\secpar)$).
-            If this is the case, we can build a valid $\adversary'$ to win with non negligible probability $\NISHeufgame{}_{\Pi', \adversary}(\secpar)$ (resp. $\NISHeufgamecca{}_{\Pi', \adversary}(\secpar)$).
+            If this is the case, we can build a valid $\adversary'$ to win with non negligible probability $\NISHeufgame{}_{\Pi', \adversary'}(\secpar)$ (resp. $\NISHeufgamecca{}_{\Pi', \adversary'}(\secpar)$).
             The reduction is the following.
 
             \begin{enumerate}

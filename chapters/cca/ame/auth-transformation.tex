@@ -1,6 +1,6 @@
 \begin{theorem}\label{theo:ame_nizk_auth}
     Let $\Pi', \sig, \nizk$ be as above.
-    If $\Pi'$ has CPA authenticity, $\sig$ is EUF-CMA secure and $\nizk$ satisfies true-simulation extractability for $f(\sattr, \signature, \raccess, \msg, r) = (\sattr, \raccess, \msg)$, then the ME scheme $\Pi$ from construction~\ref{constr:ame_nizk} achieves CCA authenticity and preserves its privacy.
+    If $\Pi'$ has CPA authenticity, $\sig$ is EUF-CMA secure and $\nizk$ satisfies true-simulation extractability for $f$ such that $f(\sattr, \signature, \raccess, \msg, r) = (\sattr, \raccess, \msg)$, then the ME scheme $\Pi$ from construction~\ref{constr:ame_nizk} achieves CCA authenticity and preserves its privacy.
 \end{theorem}
 
 \begin{proof}
@@ -9,7 +9,10 @@
     \begin{lemma}\label{lemma:ame_priv_same}
         Construction~\ref{constr:ame_nizk} preserves CPA (resp. CCA) privacy.
         \begin{proof}
-            Let assume that $\Pi$ does not preserve its privacy. This implies that there exists a valid $\adversary$ able to win with non negligible probability $\NISHmatchgame{\arranged}_{\Pi, \adversary}(\secpar)$ (resp. $\NISHmatchgamecca{\arranged}_{\Pi, \adversary}(\secpar)$). If this is the case, we can build a valid $\adversary'$ to win with non negligible probability $\NISHmatchgame{\arranged}_{\Pi', \adversary}(\secpar)$ (resp. $\NISHmatchgamecca{\arranged}_{\Pi', \adversary}(\secpar)$). The reduction is the following.
+            Let assume that $\Pi$ does not preserve its privacy.
+            This implies that there exists a valid $\adversary$ able to win with non negligible probability $\NISHmatchgame{\arranged}_{\Pi, \adversary}(\secpar)$ (resp. $\NISHmatchgamecca{\arranged}_{\Pi, \adversary}(\secpar)$).
+            If this is the case, we can build a valid $\adversary'$ to win with non negligible probability $\NISHmatchgame{\arranged}_{\Pi', \adversary'}(\secpar)$ (resp. $\NISHmatchgamecca{\arranged}_{\Pi', \adversary'}(\secpar)$).
+            The reduction is the following.
 
             \begin{enumerate}
                 \item (setup) $\adversary'$ receives the master public key $\mpk'$ from the challenger. Then it computes $(\crs,\tpsim,\tpext)\getsr\nizkext_0(\secparam)$, the signatures keys $(\sk, \pk) \getsr \kgen(\secparam)$ and gives $\adversary$ the new master public key $\mpk = (\mpk', \pk, \crs)$.
@@ -30,7 +33,10 @@
         Construction~\ref{constr:ame_nizk} achieves CCA-authenticity.
         \begin{proof}
             The proof is almost the same as Lemma ~\ref{lemma:me_auth}: the only difference is that here we do not need to simulate anymore the generation of the policy keys.
-            Let assume $\Pi$ does not achieve CCA-authenticity. This implies that there exists a valid $\adversary$ able to win with non-negligible probability $\NISHeufgamecca{\arranged}_{\Pi, \adversary}(\secpar)$. If this is the case, we can build a valid $\adversary'$ to win with non-negligible probability $\Sigeufgame_{\sig, \adversary'}(\secpar)$. The reduction is the following.
+            Let assume $\Pi$ does not achieve CCA-authenticity.
+            This implies that there exists a valid $\adversary$ able to win with non-negligible probability $\NISHeufgamecca{\arranged}_{\Pi, \adversary}(\secpar)$.
+            If this is the case, we can build a valid $\adversary'$ to win with non-negligible probability $\Sigeufgame_{\sig, \adversary'}(\secpar)$.
+            The reduction is the following.
 
             \begin{enumerate}
                 \item (setup) $\adversary'$ receives the public key $\pk$ from the challenger. Then it generates the keys $(\msk', \kpol, \mpk') \getsr \setup'(\secparam)$ together with $(\crs,\tpsim,\tpext)\getsr\nizkext_0(\secparam)$. It gives $\adversary$ the master public key $\mpk = (\mpk', \pk, \crs)$.
