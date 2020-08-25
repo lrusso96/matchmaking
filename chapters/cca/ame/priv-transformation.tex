@@ -1,6 +1,6 @@
 \begin{theorem}\label{theo:ame_nizk_priv}
     Let $\Pi', \nizk$ be as above.
-    If $\Pi'$ is CPA private, and $\nizk$ satisfies true-simulation extractability for $f(\sattr, \signature, \raccess, \msg, r) = (\sattr, \raccess, \msg)$, then the ME scheme $\Pi$ from construction~\ref{constr:ame_nizk} is CCA-private and preserves its authenticity.
+    If $\Pi'$ is CPA private, and $\nizk$ satisfies true-simulation extractability for $f(\sattr, \signature, \raccess, \msg, r) = (\sattr, \raccess, \msg)$, then the ME scheme $\Pi$ from construction~\ref{constr:ame_nizk_priv} is CCA-private and preserves its authenticity.
 \end{theorem}
 
 \begin{proof}
@@ -43,7 +43,7 @@
                 \item (setup) $\adversary'$ receives the master public key $\mpk'$ from the challenger. Then it computes $(\crs,\tpsim,\tpext)\getsr\nizkext_0(\secparam)$, the signatures keys $(\sk, \pk) \getsr \kgen(\secparam)$ and gives $\adversary$ the new master public key $\mpk = (\mpk', \pk, \crs)$.
                 \item ($\ora_1$) on input $\sattr$, $\adversary'$ invokes \item ($\ora_1$) on input $\sattr$, $\adversary'$ invokes $\ora_1(\sattr)$ to have back $\ek'_\sattr$; moreover, it computes $\signature \getsr \sign(\sk, \sattr)$. Then it gives $\adversary$ the new sender key $\ek_\sattr = (\ek'_\sattr, \signature)$.
                 \item ($\ora_2$) on input $\rattr$, $\adversary'$ invokes $\ora_2(\rattr)$ and forwards the received $\ek'_\rattr$.
-                \item (encryption - $\ora_4$)\footnote{only for CCA game} invokes $\ora_4(\rattr)$ and forwards the received ciphertext $\cipher$.
+                \item (encryption - $\ora_4$)\footnote{Only for CCA game.} invokes $\ora_4(\rattr)$ and forwards the received ciphertext $\cipher$.
                 \item (challenge) on input $((\cipher', \pi), \rattr, \saccess)$, forwards the tuple $(\cipher, \rattr, \saccess)$ to the challenger.
             \end{enumerate}
         \end{proof}

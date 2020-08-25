@@ -1,6 +1,6 @@
 \begin{theorem}\label{theo:me_nizk_priv}
     Let $\Pi', \nizk$ be as above.
-    If $\Pi'$ is CPA private, and $\nizk$ satisfies true-simulation extractability for $f(\sattr, \raccess, \msg, r) = (\sattr, \raccess, \msg)$, then the ME scheme $\Pi$ from construction~\ref{constr:me_nizk} is CCA-private and preserves its authenticity.
+    If $\Pi'$ is CPA private, and $\nizk$ satisfies true-simulation extractability for $f(\sattr, \raccess, \msg, r) = (\sattr, \raccess, \msg)$, then the ME scheme $\Pi$ from construction~\ref{constr:me_nizk_priv} is CCA-private and preserves its authenticity.
 \end{theorem}
 
 \begin{proof}
@@ -45,7 +45,7 @@
                 \item ($\ora_1$) on input $\sattr$, $\adversary'$ invokes \item ($\ora_1$) on input $\sattr$, $\adversary'$ invokes $\ora_1(\sattr)$ to have back the sender key $\ek_\sattr$ which is forwarded to the $\adversary$.
                 \item ($\ora_2$) on input $\rattr$, $\adversary'$ invokes $\ora_2(\rattr)$ and forwards the received $\ek'_\rattr$.
                 \item ($\ora_3$) on input $\saccess$, $\adversary'$ invokes $\ora_3(\saccess)$ and simply forwards the received $\ek'_\saccess$.
-                \item (encryption - $\ora_5$)\footnote{only for CCA game} invokes $\ora_5(\rattr)$ and forwards the received ciphertext $\cipher$.
+                \item (encryption - $\ora_5$)\footnote{Only for CCA game.} invokes $\ora_5(\rattr)$ and forwards the received ciphertext $\cipher$.
                 \item (challenge) on input $((\cipher', \pi), \rattr, \saccess)$, forwards the tuple $(\cipher, \rattr, \saccess)$ to the challenger.
             \end{enumerate}
         \end{proof}

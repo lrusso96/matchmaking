@@ -51,10 +51,10 @@ We also give two simple variants which do not require any Signatures Scheme.
 The correctness of all the previous schemes follows directly by the correctness of the underlying ME (resp. A-ME) schemes.
 
 \subsection{CCA privacy}\label{sec:cca-priv-transformation}
-We define a black-box construction to transform any CPA-private ME scheme into a CCA-private ME scheme, using construction~\ref{constr:me_nizk}.
+We define a black-box construction to transform any CPA-private ME scheme into a CCA-private ME scheme, using construction~\ref{constr:me_nizk_priv}.
 \input{chapters/cca/me/priv-transformation.tex}
 ~\newline
-In order to achieve CCA-private A-ME schemes, we can rely on construction~\ref{constr:ame_nizk} and define the following transformation.
+In order to achieve CCA-private A-ME schemes, we can rely on construction~\ref{constr:ame_nizk_priv} and define the following transformation.
 \input{chapters/cca/ame/priv-transformation.tex}
 
 \subsection{CCA authenticity}\label{sec:cca-auth-transformation}
