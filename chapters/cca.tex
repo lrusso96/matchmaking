@@ -66,6 +66,14 @@ We present here how to achieve CCA-authenticity for A-ME, using construction~\re
 
 \subsection{Direct Transformation}\label{sec:cca-full-transformation}
 We now define a black-box construction to transform any CPA-secure ME scheme into a CCA-secure ME scheme, by relying on construction~\ref{constr:me_nizk}.
+Figure \ref{fig:cca_constr} gives a visual representation of the transformation.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{images/cca_constr.png}
+    \caption{CCA Direct Transormation for ME.}
+    \label{fig:cca_constr}
+\end{figure}
+
 \input{chapters/cca/me/full-constr.tex}
 ~\newline
 For A-ME schemes we can do the same, using again construction~\ref{constr:ame_nizk} as the starting point.
