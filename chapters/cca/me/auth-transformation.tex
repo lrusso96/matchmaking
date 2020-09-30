@@ -17,8 +17,8 @@
             \begin{enumerate}
                 \item (setup) $\adversary'$ receives the master public key $\mpk'$ from the challenger. Then it computes $(\crs,\tpsim,\tpext)\getsr\nizkext_0(\secparam)$, the signatures keys $(\sk, \pk) \getsr \kgen(\secparam)$ and gives $\adversary$ the new master public key $\mpk = (\mpk', \pk, \crs)$.
                 \item ($\ora_1$) on input $\sattr$, $\adversary'$ invokes $\ora_1(\sattr)$ to have back $\ek'_\sattr$; moreover, it computes $\signature \getsr \sign(\sk, \sattr)$. Then it gives $\adversary$ the new sender key $\ek_\sattr = (\ek'_\sattr, \signature)$.
-                \item ($\ora_2$) on input $\rattr$, $\adversary'$ invokes $\ora_2(\rattr)$ and forwards the received $\ek'_\rattr$.
-                \item ($\ora_3$) on input $\saccess$, $\adversary'$ invokes $\ora_3(\saccess)$ and simply forwards the received $\ek'_\saccess$.
+                \item ($\ora_2$) on input $\rattr$, $\adversary'$ invokes $\ora_2(\rattr)$ and forwards the received $\dk_\rattr$.
+                \item ($\ora_3$) on input $\saccess$, $\adversary'$ invokes $\ora_3(\saccess)$ and simply forwards the received $\dk_\saccess$.
                 \item (decryption - $\ora_4$)\footnote{Only for CCA game.} on input $(\rattr, \saccess, (\cipher', \pi))$, it first parses the ciphertext and checks whether the proof $\pi$ is valid or not (in this case simply outputs $\bot$). Then, invokes $\ora_4$ and forwards the result.
                 \item (challenge) the input tuple is passed to the challenger that computes $\cipher'_b$; $\adversary'$ returns back $(\cipher'_b, \pi)$, where $\pi = \nizksim_1(\tpsim, \cipher'_b)$ is a simulated proof for $\cipher'_b$.
                 \item (output) the bit $b'$ is given to the challenger.
@@ -41,8 +41,8 @@
             \begin{enumerate}
                 \item (setup) $\adversary'$ receives the public key $\pk$ from the challenger. Then it generates the keys $(\msk', \kpol, \mpk') \getsr \setup'(\secparam)$ together with $(\crs,\tpsim,\tpext)\getsr\nizkext_0(\secparam)$. It gives $\adversary$ the master public key $\mpk = (\mpk', \pk, \crs)$.
                 \item ($\ora_1$) on input $\sattr$, $\adversary'$ invokes $\ora_\sign(\sattr)$ to receive a valid signature $\signature$ for $\sattr$. Then it runs $\ek'_\sattr \getsr \skgen'(\msk, \sattr)$ and returns $\ek_\sattr = (\ek_\sattr', \signature)$.
-                \item ($\ora_2$) on input $\rattr$, $\adversary'$ returns $\ek'_\rattr \getsr \rkgen'(\msk, \rattr)$.
-                \item ($\ora_3$) on input $\saccess$, $\adversary'$ returns $\ek'_\saccess \getsr \polgen'(\msk, \saccess)$.
+                \item ($\ora_2$) on input $\rattr$, $\adversary'$ returns $\dk_\rattr \getsr \rkgen'(\msk, \rattr)$.
+                \item ($\ora_3$) on input $\saccess$, $\adversary'$ returns $\dk_\saccess \getsr \polgen'(\msk, \saccess)$.
                 \item (encryption - $\ora_5$) on input the tuple $(\sattr, \raccess, \msg)$, computes a valid ciphertext $\cipher' \getsr \enc'(\ek'_\sattr, \raccess, \msg)$, for some $\ek'_\sattr \getsr \skgen'(\msk, \sattr)$. Then returns $\cipher = (\cipher', \pi)$, for a simulated proof $\pi = \nizksim_1(\tpsim, \cipher')$.
                 \item (challenge) on input $((\cipher', \pi), \rattr, \saccess)$, extracts $(\sattr, \signature)$, running $\nizkext_1(\tpext, \cipher', \pi)$, and forwards the tuple to the challenger.
             \end{enumerate}
