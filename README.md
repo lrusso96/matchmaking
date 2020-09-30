@@ -1,1 +1,1 @@
-# Matchmaking Encryption with Securityagainst Chosen-Ciphertext Attacks
+# Matchmaking Encryption with Security against Chosen-Ciphertext Attacks
