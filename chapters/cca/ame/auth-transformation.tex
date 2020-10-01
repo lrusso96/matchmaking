@@ -39,7 +39,7 @@
             The reduction is the following.
 
             \begin{enumerate}
-                \item (setup) $\adversary'$ receives the public key $\pk$ from the challenger. Then it generates the keys $(\msk', \kpol, \mpk') \getsr \setup'(\secparam)$ together with $(\crs,\tpsim,\tpext)\getsr\nizkext_0(\secparam)$. It gives $\adversary$ the master public key $\mpk = (\mpk', \pk, \crs)$.
+                \item (setup) $\adversary'$ receives the public key $\pk$ from the challenger. Then it generates the keys $(\msk', \kpol, \mpk') \getsr \setup'(\secparam)$ together with NIZK trapdoors $(\crs,\tpsim,\tpext)\getsr\nizkext_0(\secparam)$. It gives $\adversary$ the master public key $\mpk = (\mpk', \pk, \crs)$.
                 \item ($\ora_1$) on input $\sattr$, $\adversary'$ invokes $\ora_\sign(\sattr)$ to receive a valid signature $\signature$ for $\sattr$. Then it runs $\ek'_\sattr \getsr \skgen'(\msk, \sattr)$ and returns $\ek_\sattr = (\ek_\sattr', \signature)$.
                 \item ($\ora_2$) on input $(\rattr, \saccess)$, $\adversary'$ returns $\dk_{\rattr, \saccess} \getsr \rkgen'(\msk, \rattr, \saccess)$.
                 \item (encryption - $\ora_4$) on input the tuple $(\sattr, \raccess, \msg)$, it computes a valid ciphertext $\cipher' \getsr \enc'(\ek'_\sattr, \raccess, \msg)$, for some $\ek'_\sattr \getsr \skgen'(\msk, \sattr)$. Then returns $\cipher = (\cipher', \pi)$, for a simulated proof $\pi = \nizksim_1(\tpsim, \cipher')$.

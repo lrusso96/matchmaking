@@ -14,7 +14,7 @@ For instance, in the social matchmaking setting, Alice can encrypt a message $m$
 On the other end, Bob will be able to decrypt the message if and only if Alice corresponds to his ideal partner: this is again expressed through a policy $\mathbb{S}$.
 The decryption is successful if $\saccess(\sattr) = \raccess(\rattr) = 1$, i.e. both the policies are matched.
 \newline\newline
-In Matchmaking Encryption, a trusted authority generates encryption and decryption keys associated, respectively, to attributes of the sender and the receiver.
+In Matchmaking Encryption, a trusted authority generates encryption and decryption keys associated, respectively, with attributes of the sender and the receiver.
 The authority also generates an additional decryption key for the receiver, associated with an arbitrary policy of its choice.
 The sender of the message can specify on the fly an arbitrary policy the receiver must satisfy in order for the message to be revealed.
 The guarantee is now that the receiver will obtain the message if and only if a match occurs.
@@ -34,7 +34,7 @@ Security is defined via two properties: privacy and authenticity.
 
 \paragraph{Privacy}
 Intuitively, privacy aims at capturing secrecy of the sender’s inputs in presence of malicious receivers: during the decryption, nothing is leaked beyond the fact that a match occurred or did not occur; in particular, in case of mismatch, the reason why the match did not occur is not revealed.
-This is a much stronger guarantee w.r.t the one addressed by dual policy ABE schemes,\footnote{Here the sender encrypts a message by choosing both a policy and a set of attributes; the receiver can decrypt the ciphertext using a decryption key associated to both the receiver’s policy and attributes.} introduced by Attrapadung and Imai \cite{Attrapadung}, which only protects the secrecy of the message.
+This is a much stronger guarantee w.r.t the one addressed by dual policy ABE schemes,\footnote{Here the sender encrypts a message by choosing both a policy and a set of attributes; the receiver can decrypt the ciphertext using a decryption key associated to both the receiver’s policy and attributes.} introduced by Attrapadung and Imai \cite{Attrapadung}, which only protect the secrecy of the message.
 To ensure such a guarantee, any ME construction needs to face the technical challenge of simultaneously checking the policies chosen by the sender and the receiver: this check can be seen as an atomic operation.
 
 \paragraph{Authenticity}

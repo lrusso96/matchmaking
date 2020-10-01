@@ -39,7 +39,7 @@
             The reduction is the following.
 
             \begin{enumerate}
-                \item (setup) $\adversary'$ receives the public key $\pk$ from the challenger. Then it generates the keys $(\msk', \kpol, \mpk') \getsr \setup'(\secparam)$ together with $(\crs,\tpsim,\tpext)\getsr\nizkext_0(\secparam)$. It gives $\adversary$ the master public key $\mpk = (\mpk', \pk, \crs)$.
+                \item (setup) $\adversary'$ receives the public key $\pk$ from the challenger. Then it generates the keys $(\msk', \kpol, \mpk') \getsr \setup'(\secparam)$ together with the NIZK trapdoors $(\crs,\tpsim,\tpext)\getsr\nizkext_0(\secparam)$. It gives $\adversary$ the master public key $\mpk = (\mpk', \pk, \crs)$.
                 \item ($\ora_1$) on input $\sattr$, $\adversary'$ invokes $\ora_\sign(\sattr)$ to receive a valid signature $\signature$ for $\sattr$. Then it runs $\ek'_\sattr \getsr \skgen'(\msk, \sattr)$ and returns $\ek_\sattr = (\ek_\sattr', \signature)$.
                 \item ($\ora_2$) on input $\rattr$, $\adversary'$ returns $\dk_\rattr \getsr \rkgen'(\msk, \rattr)$.
                 \item ($\ora_3$) on input $\saccess$, $\adversary'$ returns $\dk_\saccess \getsr \polgen'(\msk, \saccess)$.

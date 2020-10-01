@@ -11,7 +11,7 @@
     We construct the new A-ME scheme $\Pi$ as follows:
     \begin{description}
         \item[$\setup, \skgen,\enc$:] Identical to the ones in construction \ref{constr:me_nizk}
-        \item[$\rkgen(\msk, \rattr, \saccess)$:] the randomized receiver-key generator takes as input the master secret key $\msk = (\msk', \sk)$, attributes $\rattr \in \bin^*$ and a policy $\saccess:\bin^* \to \bin$. The algorithm computes the key $\dk_{\rattr, \saccess} \getsr \rkgen'(\msk', \rattr, \saccess)$.
-        \item[$\dec(\dk_{\rattr, \saccess}, \cipher)$:] the deterministic decryption algorithm takes as input a decryption key $\dk_{\rattr, \saccess}$ and a ciphertext $\cipher = (\cipher', \pi)$. The algorithm first checks whether $\verifier(\crs, (\cipher', \pk, \mpk'), \pi) = 0$. If true, returns $\bot$; else it returns $\dec'(\dk'_{\rattr, \saccess}, \cipher')$.
+        \item[$\rkgen(\msk, \rattr, \saccess)$:] the randomized receiver-key generator takes as input the master secret key $\msk = (\msk', \sk)$, attributes $\rattr \in \bin^*$ and a policy $\saccess:\bin^* \to \bin$. The algorithm computes $\dk_{\rattr, \saccess} \getsr \rkgen'(\msk', \rattr, \saccess)$.
+        \item[$\dec(\dk_{\rattr, \saccess}, \cipher)$:] the deterministic decryption algorithm takes as input a decryption key $\dk_{\rattr, \saccess}$ and a ciphertext $\cipher = (\cipher', \pi)$. The algorithm first checks whether $\verifier(\crs, (\cipher', \pk, \mpk'), \pi) = 0$. If true, returns $\bot$; else it returns the same as $\dec'(\dk'_{\rattr, \saccess}, \cipher')$.
     \end{description}
 \end{construction}
